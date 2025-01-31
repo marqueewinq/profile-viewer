@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="ProfileApp">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Profile Viewer</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular.min.js"></script>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+            }
+            h2 {
+                margin-bottom: 0;
+            }
+            h3 {
+                margin-top: 0;
+                margin-bottom: 0;
+            }
+            h4 {
+                margin-top: 0;
+                margin-bottom: 0;
+            }
+            .container {
+                width: 50%;
+                margin: auto;
+                padding: 5px;
+            }
+            .profile {
+                border: 1px solid #ddd;
+                padding: 10px;
+                margin: 10px 0;
+                border-radius: 5px;
+                text-align: center;
+            }
+            input,
+            select {
+                margin: 5px 0;
+                padding: 5px;
+                width: 100%;
+                text-align: center;
+            }
+            .weapons-table {
+                width: 100%;
+                border-collapse: collapse;
+                table-layout: fixed;
+                text-align: center;
+            }
+            .weapons-table th, .weapons-table td {
+                padding: 6px;
+                text-align: center;
+            }
+            .weapons-table th {
+                background-color: #e0e0e0;
+            }
+            .weapons-table tr:nth-child(even) {
+                background-color: #f9f9f9;
+            }
+            .weapons-table tr:nth-child(odd) {
+                background-color: #fff;
+            }
+            .stats-table {
+                width: 100%;
+                border-collapse: collapse;
+                table-layout: fixed;
+                text-align: center;
+                margin-bottom: 5px; /* Reduced margin */
+            }
+            .stats-table th, .stats-table td {
+                width: 16.66%;
+                text-align: center;
+            }
+            .weapons-table th:first-child, .weapons-table td:first-child {
+                width: 70%;
+                text-align: left;
+            }
+            .weapons-table th:not(:first-child), .weapons-table td:not(:first-child) {
+                width: 5%;
+            }
+            .text-left {
+                text-align: left;
+                margin-top: 5px; /* Reduced margin */
+            }
+            .rule-description {
+                background-color: #f0f0f0;
+                border: 1px solid #ccc;
+                padding: 10px;
+                margin-top: 5px;
+                display: none;
+            }
+            .keywords {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 5px;
+                border: 1px solid #000;
+                padding: 5px;
+                margin-top: 5px;
+            }
+            .profile-header {
+                width: 100%;
+                border-collapse: collapse;
+                table-layout: fixed;
+                text-align: center;
+                margin-bottom: 5px; /* Reduced margin */
+            }
+            .profile-header td {
+                padding: 6px;
+                text-align: center;
+            }
+            .profile-header td.profile-name {
+                text-align: left;
+                font-size: 1.5em;
+                font-weight: bold;
+            }
+            .profile-header td.profile-faction {
+                text-align: right;
+                font-size: 1.2em;
+                font-weight: bold;
+            }
+        </style>
+    </head>
+    <body ng-controller="ProfileController" ng-click="hideDescription()">
+        <div class="container">
+            <h2>Profile Viewer</h2>
+
+            <input
+                type="text"
+                ng-model="searchText"
+                placeholder="Search by name..."
+            />
+
+            <div class="profile" ng-repeat="profile in profiles | filter:{name: searchText}">
+                <table class="profile-header">
+                    <tr>
+                        <td class="profile-name"><h2>{{ profile.name }}</h2></td>
+                        <td class="profile-faction"><h3>{{ profile.faction }}</h3></td>
+                    </tr>
+                </table>
+                <table class="stats-table">
+                    <tr>
+                        <th>M</th>
+                        <th>T</th>
+                        <th>Sv</th>
+                        <th>W</th>
+                        <th>Ld</th>
+                        <th>OC</th>
+                    </tr>
+                    <tr>
+                        <td>{{ profile.stats.M }}</td>
+                        <td>{{ profile.stats.T }}</td>
+                        <td>{{ profile.stats.Sv }}</td>
+                        <td>{{ profile.stats.W }}</td>
+                        <td>{{ profile.stats.Ld }}</td>
+                        <td>{{ profile.stats.OC }}</td>
+                    </tr>
+                </table>
+                <table class="weapons-table">
+                    <tr>
+                        <th>Ranged Weapons</th>
+                        <th>Range</th>
+                        <th>A</th>
+                        <th>BS</th>
+                        <th>S</th>
+                        <th>AP</th>
+                        <th>D</th>
+                    </tr>
+                    <tr ng-repeat="weapon in profile.rangedWeapons">
+                        <td>
+                            {{ weapon.name }}
+                            <span ng-if="weapon.rules.length">
+                                <span ng-repeat="rule in weapon.rules" ng-click="$event.stopPropagation(); showDescription(rule)">
+                                    [{{ rule }}]
+                                </span>
+                            </span>
+                        </td>
+                        <td>{{ weapon.range }}</td>
+                        <td>{{ weapon.A }}</td>
+                        <td>{{ weapon.BS }}</td>
+                        <td>{{ weapon.S }}</td>
+                        <td>{{ weapon.AP }}</td>
+                        <td>{{ weapon.D }}</td>
+                    </tr>
+                </table>
+                <table class="weapons-table">
+                    <tr>
+                        <th>Melee Weapons</th>
+                        <th>Range</th>
+                        <th>A</th>
+                        <th>WS</th>
+                        <th>S</th>
+                        <th>AP</th>
+                        <th>D</th>
+                    </tr>
+                    <tr ng-repeat="weapon in profile.meleeWeapons">
+                        <td>
+                            {{ weapon.name }}
+                            <span ng-if="weapon.rules.length">
+                                <span ng-repeat="rule in weapon.rules" ng-click="showDescription(rule)">
+                                    [{{ rule }}]
+                                </span>
+                            </span>
+                        </td>
+                        <td>{{ weapon.range }}</td>
+                        <td>{{ weapon.A }}</td>
+                        <td>{{ weapon.WS }}</td>
+                        <td>{{ weapon.S }}</td>
+                        <td>{{ weapon.AP }}</td>
+                        <td>{{ weapon.D }}</td>
+                    </tr>
+                </table>
+                <div class="text-left">
+                    <div ng-if="profile.abilities.length">
+                        <h4>Abilities</h4>
+                        <ul>
+                            <li ng-repeat="ability in profile.abilities">{{ ability }}</li>
+                        </ul>
+                    </div>
+                    <div ng-if="profile.options.length">
+                        <h4>Options</h4>
+                        <ul>
+                            <li ng-repeat="option in profile.options">{{ option }}</li>
+                        </ul>
+                    </div>
+                    <b>Composition:</b> <span style="font-weight: normal;">{{ profile.composition }}</span>
+                </div>
+                <div class="keywords">
+                    <span ng-repeat="keyword in profile.keywords.sort()">{{ keyword.toUpperCase() }}&nbsp;&nbsp;</span>
+                </div>
+                <div class="rule-description" ng-if="selectedRule">
+                    <strong>{{ selectedRule }}</strong>: {{ getRuleDescription(selectedRule) }}
+                </div>
+            </div>
+        </div>
+
+        <script src="rules.js"></script>
+        <script src="profiles.js"></script>
+        <script>
+            var app = angular.module("ProfileApp", []);
+            app.controller("ProfileController", function ($scope) {
+                $scope.profiles = profilesData;
+                $scope.selectedRule = null;
+
+                $scope.showDescription = function(ruleName) {
+                    $scope.selectedRule = ruleName;
+                };
+
+                $scope.hideDescription = function() {
+                    $scope.selectedRule = null;
+                };
+
+                $scope.getRuleDescription = function(ruleName) {
+                    for (var key in rulesData) {
+                        if (rulesData[key].name === ruleName) {
+                            return rulesData[key].description;
+                        }
+                    }
+                    return "";
+                };
+            });
+
+            $scope.roles = [
+                ...new Set($scope.profiles.map((profile) => profile.role)),
+            ];
+        </script>
+    </body>
+</html>
