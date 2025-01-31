@@ -7,114 +7,97 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular.min.js"></script>
         <style>
             body {
-                font-family: Arial, sans-serif;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                background-color: #f4f4f9;
+                color: #333;
+                margin: 0;
+                padding: 0;
             }
-            h2 {
-                margin-bottom: 0;
-            }
-            h3 {
-                margin-top: 0;
-                margin-bottom: 0;
-            }
-            h4 {
-                margin-top: 0;
-                margin-bottom: 0;
+            h2, h3, h4 {
+                margin: 0;
+                padding: 0;
             }
             .container {
-                width: 50%;
-                margin: auto;
-                padding: 5px;
+                max-width: 800px;
+                margin: 20px auto;
+                padding: 20px;
+                background-color: #fff;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                border-radius: 8px;
             }
             .profile {
-                border: 1px solid #ddd;
+                border-bottom: 1px solid #ddd;
+                padding: 15px 0;
+                margin-bottom: 15px;
+            }
+            .profile:last-child {
+                border-bottom: none;
+            }
+            input[type="text"] {
+                width: 100%;
                 padding: 10px;
-                margin: 10px 0;
-                border-radius: 5px;
-                text-align: center;
+                margin-bottom: 20px;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+                box-sizing: border-box;
             }
-            input,
-            select {
-                margin: 5px 0;
-                padding: 5px;
-                width: 100%;
-                text-align: center;
-            }
-            .weapons-table {
+            .weapons-table, .stats-table {
                 width: 100%;
                 border-collapse: collapse;
-                table-layout: fixed;
+                margin-bottom: 10px;
+            }
+            th, td {
+                padding: 10px;
                 text-align: center;
+                border-bottom: 1px solid #ddd;
             }
-            .weapons-table th, .weapons-table td {
-                padding: 6px;
-                text-align: center;
+            th {
+                background-color: #f0f0f0;
+                font-weight: bold;
             }
-            .weapons-table th {
-                background-color: #e0e0e0;
-            }
-            .weapons-table tr:nth-child(even) {
+            tr:nth-child(even) {
                 background-color: #f9f9f9;
-            }
-            .weapons-table tr:nth-child(odd) {
-                background-color: #fff;
-            }
-            .stats-table {
-                width: 100%;
-                border-collapse: collapse;
-                table-layout: fixed;
-                text-align: center;
-                margin-bottom: 5px; /* Reduced margin */
-            }
-            .stats-table th, .stats-table td {
-                width: 16.66%;
-                text-align: center;
-            }
-            .weapons-table th:first-child, .weapons-table td:first-child {
-                width: 70%;
-                text-align: left;
-            }
-            .weapons-table th:not(:first-child), .weapons-table td:not(:first-child) {
-                width: 5%;
             }
             .text-left {
                 text-align: left;
-                margin-top: 5px; /* Reduced margin */
+                margin-top: 10px;
             }
             .rule-description {
-                background-color: #f0f0f0;
-                border: 1px solid #ccc;
+                background-color: #e7f3fe;
+                border: 1px solid #b3d4fc;
                 padding: 10px;
-                margin-top: 5px;
-                display: none;
+                margin-top: 10px;
+                border-radius: 4px;
             }
             .keywords {
                 display: flex;
                 flex-wrap: wrap;
                 gap: 5px;
-                border: 1px solid #000;
+                border: 1px solid #ddd;
                 padding: 5px;
-                margin-top: 5px;
+                margin-top: 10px;
+                border-radius: 4px;
+                background-color: #f9f9f9;
+            }
+            .keywords span {
+                background-color: #e0e0e0;
+                padding: 5px 10px;
+                border-radius: 4px;
+                font-size: 0.9em;
             }
             .profile-header {
-                width: 100%;
-                border-collapse: collapse;
-                table-layout: fixed;
-                text-align: center;
-                margin-bottom: 5px; /* Reduced margin */
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 10px;
             }
-            .profile-header td {
-                padding: 6px;
-                text-align: center;
-            }
-            .profile-header td.profile-name {
-                text-align: left;
+            .profile-header h2 {
                 font-size: 1.5em;
-                font-weight: bold;
+                color: #007bff;
             }
-            .profile-header td.profile-faction {
-                text-align: right;
+            .profile-header h3 {
                 font-size: 1.2em;
-                font-weight: bold;
+                color: #555;
             }
         </style>
     </head>
@@ -129,12 +112,10 @@
             />
 
             <div class="profile" ng-repeat="profile in profiles | filter:{name: searchText}">
-                <table class="profile-header">
-                    <tr>
-                        <td class="profile-name"><h2>{{ profile.name }}</h2></td>
-                        <td class="profile-faction"><h3>{{ profile.faction }}</h3></td>
-                    </tr>
-                </table>
+                <div class="profile-header">
+                    <h2>{{ profile.name }}</h2>
+                    <h3>{{ profile.faction }}</h3>
+                </div>
                 <table class="stats-table">
                     <tr>
                         <th>M</th>
