@@ -153,10 +153,10 @@
                         <td>{{ profile.stats.OC }}</td>
                     </tr>
                 </table>
-                <table class="weapons-table">
+                <table class="weapons-table" ng-if="profile.rangedWeapons.length">
                     <tr>
                         <th>Ranged Weapons</th>
-                        <th>Range</th>
+                        <th>Rng</th>
                         <th>A</th>
                         <th>BS</th>
                         <th>S</th>
@@ -180,10 +180,10 @@
                         <td>{{ weapon.D }}</td>
                     </tr>
                 </table>
-                <table class="weapons-table">
+                <table class="weapons-table" ng-if="profile.meleeWeapons.length">
                     <tr>
                         <th>Melee Weapons</th>
-                        <th>Range</th>
+                        <th>Rng</th>
                         <th>A</th>
                         <th>WS</th>
                         <th>S</th>
@@ -211,7 +211,13 @@
                     <div ng-if="profile.abilities.length">
                         <h4>Abilities</h4>
                         <ul>
-                            <li ng-repeat="ability in profile.abilities">{{ ability }}</li>
+                            <li ng-repeat="ability in profile.abilities" ng-bind-html="safeHTML(ability)"></li>
+                        </ul>
+                    </div>
+                    <div ng-if="profile.wargearAbilities && profile.wargearAbilities.length">
+                        <h4>Wargear Abilities</h4>
+                        <ul>
+                            <li ng-repeat="wargearAbility in profile.wargearAbilities">{{ wargearAbility }}</li>
                         </ul>
                     </div>
                     <div ng-if="profile.options.length">
@@ -231,11 +237,10 @@
             </div>
         </div>
 
-        <script src="rules.js"></script>
         <script src="profiles.js"></script>
         <script>
             var app = angular.module("ProfileApp", []);
-            app.controller("ProfileController", function ($scope) {
+            app.controller("ProfileController", function ($scope, $sce) {
                 $scope.profiles = profilesData;
                 $scope.selectedRule = null;
 
@@ -255,11 +260,22 @@
                     }
                     return "";
                 };
+
+                $scope.isObject = function(value) {
+                    return value && typeof value === 'object' && value.constructor === Object;
+                };
+
+                $scope.isString = function(value) {
+                    return typeof value === 'string' || value instanceof String;
+                };
+                $scope.safeHTML = function(value) {
+                    return $sce.trustAsHtml(value);
+                };
+                $scope.roles = [
+                    ...new Set($scope.profiles.map((profile) => profile.role)),
+                ];
             });
 
-            $scope.roles = [
-                ...new Set($scope.profiles.map((profile) => profile.role)),
-            ];
         </script>
     </body>
 </html>
