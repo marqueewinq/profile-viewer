@@ -4,11 +4,22 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Profile Viewer</title>
+        <script src="cookies.js"></script>
+        <script>
+            if (getCookie('UserPreferences') === 'dark') {
+                document.documentElement.classList.add('dark-theme');
+            } else {
+                document.documentElement.classList.remove('dark-theme');
+            }
+        </script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular.min.js"></script>
         <link rel="stylesheet" href="style.css">
     </head>
     <body ng-controller="ProfileController" ng-click="hideDescription()">
-        <div class="menu-toggle" ng-click="toggleMenu($event)" ng-class="{hidden: menuOpen}">☰</div>
+        <div class="theme-toggle toggle-button" ng-class="{hidden: menuOpen}" ng-click="toggleTheme()" title="Toggle between light and dark theme">
+            {{ themeIcon }}
+        </div>
+        <div class="menu-toggle toggle-button" ng-class="{hidden: menuOpen}" ng-click="toggleMenu($event)">☰</div>
         <div class="side-menu" ng-class="{open: menuOpen}" ng-click="$event.stopPropagation()">
             <button class="close-button" ng-click="toggleMenu($event)">✖</button>
             <h3>Detachments</h3>

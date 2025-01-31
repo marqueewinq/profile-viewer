@@ -78,4 +78,25 @@ app.controller("ProfileController", function ($scope, $sce) {
     console.log('Profiles:', $scope.profiles);
     console.log('Detachments:', $scope.detachments);
     console.log('Filtered Profiles:', $scope.filteredProfiles);
+
+    // Initialize theme icon based on cookie
+    $scope.themeIcon = getCookie('UserPreferences') === 'dark' ? '☀️' : '🌙';
+
+    // Check for existing theme preference
+    if (getCookie('UserPreferences') === 'dark') {
+        document.documentElement.classList.add('dark-theme');
+    }
+
+    $scope.toggleTheme = function() {
+        document.documentElement.classList.toggle('dark-theme');
+        if (document.documentElement.classList.contains('dark-theme')) {
+            setCookie('UserPreferences', 'dark', 365);
+            $scope.themeIcon = '☀️'; // Sun emoji for dark theme
+            console.log('Dark theme enabled');
+        } else {
+            setCookie('UserPreferences', 'light', 365);
+            $scope.themeIcon = '🌙'; // Moon emoji for light theme
+            console.log('Light theme enabled');
+        }
+    };
 });
