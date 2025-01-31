@@ -210,7 +210,7 @@
                     <b>Composition:</b> <span style="font-weight: normal;">{{ profile.composition }}</span>
                 </div>
                 <div class="keywords">
-                    <span ng-repeat="keyword in profile.keywords.sort()">{{ keyword.toUpperCase() }}&nbsp;&nbsp;</span>
+                    <span ng-repeat="keyword in profile.keywords.sort()">{{ keyword.toUpperCase() }}</span>
                 </div>
                 <div class="rule-description" ng-if="selectedRule">
                     <strong>{{ selectedRule }}</strong>: {{ getRuleDescription(selectedRule) }}

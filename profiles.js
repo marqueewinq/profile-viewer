@@ -155,7 +155,7 @@ var profilesData = [
             "Stealth",
             "Battle Focus",
             "Disparate Paths",
-            "Psychromatic Camouflage: This unit can only be target of the ranged attack if the attacking model is within 18\"."
+            "Psychromatic Camouflage: This unit can only be the target of a ranged attack if the attacking model is within 18\"."
         ],
         keywords: [
             "Vehicle",
@@ -292,7 +292,7 @@ var profilesData = [
             "Leader: Troupe",
             "Battle Focus",
             "Disparate Paths",
-            "Choreographer of War: when this model is leading the unit, each time the model in that unit makes a Pile In or Consolidation move, it can move up to 6\" and it does not need to end that move closer to the closest enemy model, provided it moves as close as possible to the closest enemy unit.",
+            "Choreographer of War: When this model is leading the unit, each time the model in that unit makes a Pile In or Consolidation move, it can move up to 6\" and it does not need to end that move closer to the closest enemy model, provided it moves as close as possible to the closest enemy unit.",
             "Cegorach's Favour: Each time this model makes a melee attack, re-roll a To Hit roll of 1 and add +1 to the Wound roll."
         ],
         wargearAbilities: [
@@ -319,34 +319,34 @@ var profilesData = [
         },
         rangedWeapons: [
             {
+                name: "Shuriken Pistol",
+                range: "12\"",
+                A: 1,
+                BS: "3+",
+                S: 4,
+                AP: -1,
+                D: 1,
+                rules: ["ASSAULT", "PISTOL"]
+            },
+            {
                 name: "Fusion Pistol",
                 range: "6\"",
                 A: 1,
-                BS: "2+",
+                BS: "3+",
                 S: 8,
                 AP: -4,
-                D: "D6",
-                rules: ["ASSAULT", "PISTOL", "MELTA 2"]
+                D: "D3",
+                rules: ["MELTA 2"]
             },
             {
                 name: "Neuro-disruptor",
                 range: "12\"",
                 A: 1,
-                BS: "2+",
+                BS: "3+",
                 S: 4,
-                AP: -2,
+                AP: -3,
                 D: 1,
-                rules: ["ASSAULT", "PISTOL", "ANTI-INFANTRY 2+"]
-            },
-            {
-                name: "Shuriken Pistol",
-                range: "12\"",
-                A: 1,
-                BS: "2+",
-                S: 4,
-                AP: -1,
-                D: 1,
-                rules: ["ASSAULT", "PISTOL"]
+                rules: ["ANTI-INFANTRY 2+", "PISTOL"]
             }
         ],
         meleeWeapons: [
@@ -367,17 +367,7 @@ var profilesData = [
                 WS: "2+",
                 S: 4,
                 AP: -1,
-                D: 1,
-                rules: ["DEVASTATING WOUNDS"]
-            },
-            {
-                name: "Power Sword",
-                range: "Melee",
-                A: 5,
-                WS: "4+",
-                S: 4,
-                AP: -2,
-                D: 1,
+                D: 2,
                 rules: ["DEVASTATING WOUNDS"]
             }
         ],
@@ -527,47 +517,47 @@ var profilesData = [
         faction: "Harlequins"
     },
     {
-        "name": "Solitaire",
-        "stats": {
-            "M": "12\"",
-            "T": 3,
-            "Sv": "6+/4++",
-            "W": 4,
-            "Ld": "6+",
-            "OC": 1
+        name: "Solitaire",
+        stats: {
+            M: "12\"",
+            T: 3,
+            Sv: "6+/4++",
+            W: 4,
+            Ld: "6+",
+            OC: 1
         },
-        "meleeWeapons": [
+        meleeWeapons: [
             {
-                "name": "Solitaire weapons",
-                "range": "Melee",
-                "A": 9,
-                "WS": "2+",
-                "S": 6,
-                "AP": -2,
-                "D": 2,
-                "rules": ["PRECISION"]
+                name: "Solitaire Weapons",
+                range: "Melee",
+                A: 9,
+                WS: "2+",
+                S: 6,
+                AP: -2,
+                D: 2,
+                rules: ["PRECISION"]
             }
         ],
-        "wargearAbilities": [
+        wargearAbilities: [
             "Flip Belt: Each time the bearer's unit makes a Normal, Advance, Fall Back or Charge move, ignore the vertical distance when determining the range of that move."
         ],
-        "abilities": [
+        abilities: [
             "Fights First",
             "Lone Operative",
             "Stealth",
             "Battle Focus",
             "Disparate Paths",
-            "Blitz: Once per game, in your Movement phase, before this model makes a Normal move, it can use this ability. If it does, add 2D6 to its Move characteristic and add 3 to the Solitaire weapons' Attacks until the end of this turn.",
+            "Blitz: Once per game, in your Movement phase, before this model makes a Normal move, it can use this ability. If it does, add 2D6 to its Move characteristic and add 3 to the Solitaire Weapons' Attacks until the end of this turn.",
             "Blur of Movement: This model is eligible to declare a charge in the turn in which it Advanced."
         ],
-        "composition": "1 Solitaire with Solitaire weapons and Flip Belt",
-        "keywords": [
+        composition: "1 Solitaire with Solitaire Weapons and Flip Belt",
+        keywords: [
             "Infantry",
             "Character",
             "Epic Hero",
             "Aeldari",
             "Solitaire"
         ],
-        "faction": "Harlequins"
+        faction: "Harlequins"
     }
 ]; 
