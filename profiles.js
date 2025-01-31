@@ -118,7 +118,7 @@ var data = [
                 range: '12"',
                 A: 'D3',
                 BS: '3+',
-                S: 2,
+                S: 7,
                 AP: -2,
                 D: 2,
                 rules: []
@@ -422,7 +422,7 @@ var data = [
                 BS: "3+",
                 S: 8,
                 AP: -4,
-                D: "D3",
+                D: "D6",
                 rules: ["MELTA 2"]
             },
             {
