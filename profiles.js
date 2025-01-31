@@ -1,6 +1,89 @@
-var profilesData = [
+var data = [
+    {
+        name: "Ghosts of the Webway",
+        kind: "DetachmentProfile",
+        rules: [
+            {
+                name: "Acrobatic Onslaught",
+                description: "Each time a Harlequin model from your army makes a Charge move, it can move through the enemy models."
+            },
+            {
+                name: "Travelling Players",
+                description: "<ul><li>Troupe units in your army get Battleline keyword and get OC characteristic of 2.</li><li>You can include up to 3 of each of the following models: Troupe Master, Death Jester, Shadowseer.</li></ul>"
+            }
+        ],
+        enhancements: [
+            {
+                name: "Cegorach's Coil", 
+                description: "Troupe Master model only. Each time the bearer's unit makes a Charge move, select one unit within the Engagement Range of the bearer's unit, then roll one D6 for each model in the bearer's unit that in within the Engagement Range. For each 4+, that enemy unit suffers 1 mortal wound."
+            },
+            {
+                name: "Mask of Secrets",
+                description: "Shadowseer model only. Each time an enemy unit (excluding Monsters and Vehicles) within the Engagement Range of the bearer's unit Falls Back, all the models in that unit must make the Desperate Escape test. When doing so, if the enemy unit is Battle-shocked, subtract 1 from the test result."
+            },
+            {
+                name: "Murder's Jest",
+                description: "Death Jester model only. Each time the bearer makes a ranged attack that targets the unit Below Half-Strength, each successful hit becomes a Critical Hit."
+            },
+            {
+                name: "Mistweave",
+                description: "Shadowseer model only. While the bearer is leading the unit, models in that unit have Infiltrators ability."
+            }
+        ],
+        stratagems: [
+            {
+                name: "Staged Death",
+                color: "green",
+                when: "Any phase",
+                target: "One Harlequin Character model from your army that was just destroyed.",
+                effect: "At the end of the phase, set your model back up on the battlefield as close as possible to where it was destroyed and not within the Engagement Range of the enemy units, with half of it's full wounds remaining.",
+                restrictions: "Each model can only be targeted with this Stratagem once per battle."
+            },
+            {
+                name: "Heroes' Fall",
+                color: "green",
+                when: "Fight phase, just after the enemy unit has selected the targets.",
+                target: "One Harlequins unit that was selected as the target of one or more attacking unit's attacks.",
+                effect: "Until the end of the phase, each time a model in your unit is destroyed, if that model hasn't fought this phase, roll a D6. On a 4+, do not remove it from play; it can fight after the attacking unit has finished making their attacks, and is then removed from play.",
+                restrictions: null,
+            },
+            {
+                name: "Mocking Flight",
+                color: "blue",
+                when: "Your Movement phase, just after the Harlequin unit from your army Falls Back .",
+                target: "That Harlequin unit.",
+                effect: "Until the end of the turn, that unit is eligible to shoot and charge in a turn in which it Fell Back.",
+                restrictions: null,
+            },
+            {
+                name: "Trickster's Retort",
+                color: "red",
+                when: "Your opponent's Movement phase, just after an enemy unit ends a Normal, Advance or a Fall Back move.",
+                target: "One Troupe unit from your army that is within 9\" from enemy unit.",
+                effect: "Your unit can make a Normal move of up to 6\".",
+                restrictions: null,
+            },
+            {
+                name: "Bloody Dance",
+                color: "red",
+                when: "End of your Opponent's Charge phase",
+                target: "One Harlequin Infantry or Harlequin Mounted unit from your army, that is within 6\" of the enemy units and would be eligible to charge against any of those enemy units if it were your Charge phase.",
+                effect: "Your unit can declare a charge targeting one or more of those enemy units, and you resolve that charge.",
+                restrictions: "Your units does not receive the Charge Bonus for this charge."
+            },
+            {
+                name: "Exit the Stage",
+                color: "red",
+                when: "End of your Opponent's Fight phase",
+                target: "One Harlequin unit from your army that is not within Engagement Range of any enemy units.",
+                effect: "Remove your unit from the battlefield and place it into Strategic Reserves.",
+                restrictions: null
+            }
+        ]
+    },
     {
         name: "Skyweavers",
+        kind: "UnitProfile",
         stats: {
             M: '14"',
             T: 4,
@@ -84,6 +167,7 @@ var profilesData = [
     },
     {
         name: "Voidweaver",
+        kind: "UnitProfile",
         stats: {
             M: "14\"",
             T: 6,
@@ -167,6 +251,7 @@ var profilesData = [
     },
     {
         name: "Starweaver",
+        kind: "UnitProfile",
         stats: {
             M: "14\"",
             T: 6,
@@ -221,6 +306,7 @@ var profilesData = [
     },
     {
         name: "Troupe Master",
+        kind: "UnitProfile",
         stats: {
             M: "8\"",
             T: 3,
@@ -309,6 +395,7 @@ var profilesData = [
     },
     {
         name: "Troupe",
+        kind: "UnitProfile",
         stats: {
             M: "8\"",
             T: 3,
@@ -396,6 +483,7 @@ var profilesData = [
     },
     {
         name: "Death Jester",
+        kind: "UnitProfile",
         stats: {
             M: "8\"",
             T: 3,
@@ -449,6 +537,7 @@ var profilesData = [
     },
     {
         name: "Shadowseer",
+        kind: "UnitProfile",
         stats: {
             M: "8\"",
             T: 3,
@@ -518,6 +607,7 @@ var profilesData = [
     },
     {
         name: "Solitaire",
+        kind: "UnitProfile",
         stats: {
             M: "12\"",
             T: 3,
@@ -560,4 +650,4 @@ var profilesData = [
         ],
         faction: "Harlequins"
     }
-]; 
+];

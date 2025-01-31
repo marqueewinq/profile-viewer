@@ -1,0 +1,368 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+h2,
+h3,
+h4 {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    position: relative;
+}
+
+.profile {
+    border-bottom: 1px solid #ddd;
+    padding: 15px 0;
+    margin-bottom: 15px;
+}
+
+.profile:last-child {
+    border-bottom: none;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-left: 50px;
+}
+
+input[type="text"] {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.reset-button {
+    margin-left: 10px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.reset-button:hover {
+    background-color: #0056b3;
+}
+
+.weapons-table,
+.stats-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 10px;
+}
+
+th,
+td {
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #f0f0f0;
+    font-weight: bold;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.text-left {
+    text-align: left;
+    margin-top: 10px;
+}
+
+.rule-description {
+    background-color: #e7f3fe;
+    border: 1px solid #b3d4fc;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 4px;
+}
+
+.keywords {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    border: 1px solid #ddd;
+    padding: 5px;
+    margin-top: 10px;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+}
+
+.keywords span {
+    background-color: #e0e0e0;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 0.9em;
+}
+
+.profile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.profile-header h2 {
+    font-size: 1.5em;
+    color: #007bff;
+}
+
+.profile-header h3 {
+    font-size: 1.2em;
+    color: #555;
+}
+
+
+.side-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100%;
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    z-index: 1000;
+}
+
+.side-menu.open {
+    transform: translateX(0);
+}
+
+.side-menu h3 {
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+.side-menu a {
+    display: block;
+    color: #fff;
+    text-decoration: none;
+    margin-bottom: 10px;
+    padding: 5px 0;
+    border-bottom: 1px solid #444;
+}
+
+.side-menu a:hover {
+    background-color: #444;
+}
+
+.menu-toggle {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 1001;
+    transition: opacity 0.3s ease;
+}
+
+.menu-toggle.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: transparent;
+    color: #fff;
+    border: none;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+.entry-count {
+    text-align: left;
+    margin-left: 50px;
+}
+
+.filter-buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.filter-button {
+    margin: 0 5px;
+    padding: 5px 10px;
+    background-color: transparent;
+    color: #007bff;
+    border: 2px solid #007bff;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9em;
+}
+
+.filter-button.active {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.filter-button.active span {
+    margin-right: 5px;
+}
+
+.filter-button:hover {
+    background-color: #0056b3;
+    color: #fff;
+}
+
+.filter-button span {
+    margin-right: 5px;
+}
+
+.rules-section,
+.enhancements-section,
+.stratagems-section {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.rules-section h4,
+.enhancements-section h4,
+.stratagems-section h4 {
+    margin-bottom: 10px;
+    color: #007bff;
+    font-size: 1.2em;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 5px;
+}
+
+.rules-section ul,
+.enhancements-section ul,
+.stratagems-section ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.rules-section li,
+.enhancements-section li,
+.stratagems-section li {
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.enhancements-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.enhancement-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.enhancement-card strong {
+    display: block;
+    color: #007bff;
+    margin-bottom: 5px;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 5px;
+}
+
+.stratagems-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.stratagem-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+}
+
+.stratagem-card strong {
+    display: block;
+    color: #007bff;
+    margin-bottom: 10px;
+    font-size: 1.1em;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 5px;
+}
+
+.stratagem-detail {
+    margin-top: 5px;
+    font-size: 0.95em;
+    color: #333;
+}
+
+.stratagem-detail em {
+    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace;
+    color: inherit;
+    margin-right: 5px;
+    display: inline;
+}
+
+.stratagem-detail span {
+    color: #555;
+    display: inline;
+}
+
+.rules-section h4,
+.enhancements-grid h4,
+.stratagems-grid h4 {
+    margin-bottom: 10px;
+    color: #007bff;
+    font-size: 1.2em;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 5px;
+}
+
+.highlighted {
+    background-color: #ffeb3b; 
+    border: 1px solid #fbc02d; 
+    padding: 2px 4px; 
+    border-radius: 4px; 
+    font-weight: bold; 
+    color: #333; 
+}
