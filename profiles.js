@@ -192,7 +192,7 @@ var data = [
                 range: "24\"",
                 A: 2,
                 BS: "3+",
-                S: 8,
+                S: 12,
                 AP: -3,
                 D: 4,
                 rules: []
@@ -431,7 +431,7 @@ var data = [
                 A: 1,
                 BS: "3+",
                 S: 4,
-                AP: -3,
+                AP: -2,
                 D: 1,
                 rules: ["ANTI-INFANTRY 2+", "PISTOL"]
             }
@@ -454,7 +454,7 @@ var data = [
                 WS: "2+",
                 S: 4,
                 AP: -1,
-                D: 2,
+                D: 1,
                 rules: ["DEVASTATING WOUNDS"]
             }
         ],
