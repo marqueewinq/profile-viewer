@@ -286,8 +286,11 @@
             </div>
         </div>
 
-        <script src="profiles.js"></script>
-        <script src="app.js"></script>
+        <script>
+            const timestamp = new Date().getTime();
+            document.write('<script src="profiles.js?v=' + timestamp + '"><\/script>');
+            document.write('<script src="app.js?v=' + timestamp + '"><\/script>');
+        </script>
     </body>
 </html>
 
