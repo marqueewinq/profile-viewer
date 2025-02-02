@@ -41,29 +41,29 @@
                 <button class="reset-button" ng-click="resetFilters()">Reset</button>
             </div>
             <div class="faction-filter-buttons">
-                <button class="filter-button" ng-click="filterByFaction('')" ng-class="{active: !selectedFaction}">
+                <button class="filter-button" ng-click="filterByFaction(''); searchText=''" ng-class="{active: !selectedFaction}">
                     <span ng-if="!selectedFaction">✔</span>
                     <span ng-if="selectedFaction">○</span>
                     All Factions
                 </button>
-                <button class="filter-button" ng-repeat="faction in factions" ng-click="filterByFaction(faction)" ng-class="{active: selectedFaction === faction}">
+                <button class="filter-button" ng-repeat="faction in factions" ng-click="filterByFaction(faction); searchText=''" ng-class="{active: selectedFaction === faction}">
                     <span ng-if="selectedFaction === faction">✔</span>
                     <span ng-if="selectedFaction !== faction">○</span>
                     {{ faction }}
                 </button>
             </div>
             <div class="filter-buttons">
-                <button class="filter-button" ng-click="toggleFilter('UnitProfile')" ng-class="{active: activeFilter === 'UnitProfile'}">
+                <button class="filter-button" ng-click="toggleFilter('UnitProfile'); searchText=''" ng-class="{active: activeFilter === 'UnitProfile'}">
                     <span ng-if="activeFilter === 'UnitProfile'">✔</span>
                     <span ng-if="activeFilter !== 'UnitProfile'">○</span>
                     Unit Profiles
                 </button>
-                <button class="filter-button" ng-click="toggleFilter('DetachmentProfile')" ng-class="{active: activeFilter === 'DetachmentProfile'}">
+                <button class="filter-button" ng-click="toggleFilter('DetachmentProfile'); searchText=''" ng-class="{active: activeFilter === 'DetachmentProfile'}">
                     <span ng-if="activeFilter === 'DetachmentProfile'">✔</span>
                     <span ng-if="activeFilter !== 'DetachmentProfile'">○</span>
                     Detachments
                 </button>
-                <button class="filter-button" ng-click="toggleFilter('ArmyRuleProfile')" ng-class="{active: activeFilter === 'ArmyRuleProfile'}">
+                <button class="filter-button" ng-click="toggleFilter('ArmyRuleProfile'); searchText=''" ng-class="{active: activeFilter === 'ArmyRuleProfile'}">
                     <span ng-if="activeFilter === 'ArmyRuleProfile'">✔</span>
                     <span ng-if="activeFilter !== 'ArmyRuleProfile'">○</span>
                     Army Rules
@@ -285,6 +285,9 @@
                 </div>
             </div>
         </div>
+
+        <!-- Back to Top Button -->
+        <button id="backToTop" class="back-to-top button-common" ng-click="scrollToTop()">↑</button>
 
         <script>
             const timestamp = new Date().getTime();

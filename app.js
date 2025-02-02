@@ -1,5 +1,5 @@
 var app = angular.module("ProfileApp", []);
-app.controller("ProfileController", function ($scope, $sce) {
+app.controller("ProfileController", function ($scope, $sce, $window) {
     // Define an enum-like object for profile kinds
     const ProfileKind = {
         UNIT: 'UnitProfile',
@@ -103,4 +103,19 @@ app.controller("ProfileController", function ($scope, $sce) {
     $scope.formatCompositionDescription = function(description, range) {
         return description.includes('[[range]]') ? description.replace('[[range]]', range) : `${range} ${description}`;
     };
+
+    // Function to scroll to the top of the page
+    $scope.scrollToTop = function() {
+        $window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    // Show/hide the back-to-top button based on scroll position
+    angular.element($window).on('scroll', function() {
+        const backToTopButton = document.getElementById('backToTop');
+        if ($window.pageYOffset > 300) {
+            backToTopButton.classList.add('show');
+        } else {
+            backToTopButton.classList.remove('show');
+        }
+    });
 });

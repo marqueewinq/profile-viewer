@@ -900,7 +900,7 @@ var data = [
         },
         "keywords": [
             "Psyker",
-            "Asuryani",
+            "Aeldari",
             "Infantry",
             "Character",
             "Farseer"
@@ -999,7 +999,7 @@ var data = [
         },
         "keywords": [
             "Psyker",
-            "Asuryani",
+            "Aeldari",
             "Mounted",
             "Character",
             "Farseer",
@@ -1007,5 +1007,399 @@ var data = [
             "Farseer Skyrunner"
         ],
         "faction": "Asuryani"
+    },
+    {
+        "name": "Autarch",
+        "kind": "UnitProfile",
+        "stats": {
+            "M": "7\"",
+            "T": 3,
+            "Sv": "3+/4++",
+            "W": 4,
+            "Ld": "6+",
+            "OC": 1
+        },
+        "rangedWeapons": [
+            {
+                "name": "Death Spinner",
+                "range": "12\"",
+                "A": "D6",
+                "BS": "-",
+                "S": 4,
+                "AP": -1,
+                "D": 1,
+                "rules": ["IGNORES COVER", "TORRENT"]
+            },
+            {
+                "name": "Dragon Fusion Gun",
+                "range": "12\"",
+                "A": 1,
+                "BS": "2+",
+                "S": 9,
+                "AP": -4,
+                "D": "D6",
+                "rules": ["ASSAULT", "MELTA 3"]
+            },
+            {
+                "name": "Dragon Fusion Pistol",
+                "range": "6\"",
+                "A": 1,
+                "BS": "2+",
+                "S": 9,
+                "AP": -4,
+                "D": "D6",
+                "rules": ["ASSAULT", "PISTOL", "MELTA 2"]
+            },
+            {
+                "name": "Reaper Launcher (starshot)",
+                "range": "48\"",
+                "A": 1,
+                "BS": "3+",
+                "S": 10,
+                "AP": -2,
+                "D": 3,
+                "rules": ["HEAVY", "IGNORES COVER"]
+            },
+            {
+                "name": "Reaper Launcher (starswarm)",
+                "range": "48\"",
+                "A": 2,
+                "BS": "3+",
+                "S": 4,
+                "AP": -2,
+                "D": 1,
+                "rules": ["HEAVY", "IGNORES COVER"]
+            },
+            {
+                "name": "Shuriken Pistol",
+                "range": "12\"",
+                "A": 1,
+                "BS": "2+",
+                "S": 4,
+                "AP": -1,
+                "D": 1,
+                "rules": ["ASSAULT", "PISTOL"]
+            }
+        ],
+        "meleeWeapons": [
+            {
+                "name": "Banshee Sword",
+                "range": "Melee",
+                "A": 5,
+                "WS": "2+",
+                "S": 4,
+                "AP": -2,
+                "D": 2,
+                "rules": ["ANTI-INFANTRY 2+"]
+            },
+            {
+                "name": "Scorpion Chainsword",
+                "range": "Melee",
+                "A": 7,
+                "WS": "2+",
+                "S": 4,
+                "AP": -1,
+                "D": 1,
+                "rules": ["SUSTAINED HITS 1"]
+            },
+            {
+                "name": "Star Glaive",
+                "range": "Melee",
+                "A": 4,
+                "WS": "2+",
+                "S": 6,
+                "AP": -3,
+                "D": 3,
+                "rules": []
+            }
+        ],
+        "options": [
+            "Shuriken Pistol can be replaced with one of: Dragon Fusion Gun, Dragon Fusion Pistol, Death Spinner, Reaper Launcher",
+            "Star Glaive can be replaced with Banshee Sword or a Scorpion Chainsword"
+        ],
+        "abilities": [
+            "Leader: Dark Reapers, Dire Avengers, Fire Dragons, Guardians, Howling Banshees, Storm Guardians, Striking Scorpions.",
+            "- While attached to a Howling Banshees unit, it has Fights First ability.",
+            "- While attached to a Striking Scorpions unit, it has Infiltrator, Scout 9\" and Stealth abilities.",
+            "Battle Focus",
+            "Superlative Strategist: When this model is leading a unit, you can re-roll Advance rolls for that unit. You can also re-roll any rolls made for the Agile Maneuver targeting this unit.",
+            "Path of Command: Once per battle round, one model from your army can use this ability to reduce the CP cost of the Stratagem targeting this model's unit by 1 CP."
+        ],
+        "composition": {
+            "description": "Autarch with Shuriken Pistol and Star Glaive",
+            "cost_map": [
+                { "range": "1", "cost": 75 }
+            ]
+        },
+        "keywords": [
+            "Infantry",
+            "Character",
+            "Aeldari",
+            "Grenades",
+            "Autarch"
+        ],
+        "faction": "Asuryani"
+    },
+    {
+        "name": "Autarch Wayleaper",
+        "kind": "UnitProfile",
+        "stats": {
+            "M": "14\"",
+            "T": 3,
+            "Sv": "3+/4++",
+            "W": 4,
+            "Ld": "6+",
+            "OC": 1
+        },
+        "rangedWeapons": [
+            {
+                "name": "Death Spinner",
+                "range": "12\"",
+                "A": "D6",
+                "BS": "-",
+                "S": 4,
+                "AP": -1,
+                "D": 1,
+                "rules": ["IGNORES COVER", "TORRENT"]
+            },
+            {
+                "name": "Dragon Fusion Gun",
+                "range": "12\"",
+                "A": 1,
+                "BS": "2+",
+                "S": 9,
+                "AP": -4,
+                "D": "D6",
+                "rules": ["ASSAULT", "MELTA 3"]
+            },
+            {
+                "name": "Dragon Fusion Pistol",
+                "range": "6\"",
+                "A": 1,
+                "BS": "2+",
+                "S": 9,
+                "AP": -4,
+                "D": "D6",
+                "rules": ["ASSAULT", "PISTOL", "MELTA 2"]
+            },
+            {
+                "name": "Reaper Launcher (starshot)",
+                "range": "48\"",
+                "A": 1,
+                "BS": "3+",
+                "S": 10,
+                "AP": -2,
+                "D": 3,
+                "rules": ["HEAVY", "IGNORES COVER"]
+            },
+            {
+                "name": "Reaper Launcher (starswarm)",
+                "range": "48\"",
+                "A": 2,
+                "BS": "3+",
+                "S": 4,
+                "AP": -2,
+                "D": 1,
+                "rules": ["HEAVY", "IGNORES COVER"]
+            },
+            {
+                "name": "Shuriken Pistol",
+                "range": "12\"",
+                "A": 1,
+                "BS": "2+",
+                "S": 4,
+                "AP": -1,
+                "D": 1,
+                "rules": ["ASSAULT", "PISTOL"]
+            }
+        ],
+        "meleeWeapons": [
+            {
+                "name": "Banshee Sword",
+                "range": "Melee",
+                "A": 5,
+                "WS": "2+",
+                "S": 4,
+                "AP": -2,
+                "D": 2,
+                "rules": ["ANTI-INFANTRY 2+"]
+            },
+            {
+                "name": "Scorpion Chainsword",
+                "range": "Melee",
+                "A": 7,
+                "WS": "2+",
+                "S": 4,
+                "AP": -1,
+                "D": 1,
+                "rules": ["SUSTAINED HITS 1"]
+            },
+            {
+                "name": "Star Glaive",
+                "range": "Melee",
+                "A": 4,
+                "WS": "2+",
+                "S": 6,
+                "AP": -3,
+                "D": 3,
+                "rules": []
+            }
+        ],
+        "options": [
+            "Shuriken Pistol can be replaced with one of: Dragon Fusion Gun, Dragon Fusion Pistol, Death Spinner, Reaper Launcher",
+            "Star Glaive can be replaced with Banshee Sword or a Scorpion Chainsword"
+        ],
+        "abilities": [
+            "Leader: Swooping Hawks, Warp Spiders.",
+            "Battle Focus",
+            "Deep Strike",  
+            "Indomitable Strength of Will: While this model is leading a unit, each time you spend a Battle Focus token to target this unit with the Agile Maneuver, roll a D6; on a 3+, you get 1 Battle Focus token.",
+            "Path of Command: Once per battle round, one model from your army can use this ability to reduce the CP cost of the Stratagem targeting this model's unit by 1 CP."
+        ],
+        "composition": {
+            "description": "Autarch Wayleaper with Shuriken Pistol and Star Glaive",
+            "cost_map": [
+                { "range": "1", "cost": 80 }    
+            ]
+        },
+        "keywords": [
+            "Infantry",
+            "Character",
+            "Aeldari",
+            "Grenades",
+            "Autarch",
+            "Autarch Wayleaper",
+            "Jump Pack",
+            "Fly"
+        ],
+        "faction": "Asuryani"
+    },
+    {
+        "name": "Eldrad Ulthran",
+        "kind": "UnitProfile",
+        "stats": {
+            "M": "7\"",
+            "T": 4,
+            "Sv": "6+/4++",
+            "W": 5,
+            "Ld": "6+",
+            "OC": 1
+        },
+        "rangedWeapons": [
+            {
+                "name": "Mind War",
+                "range": "18\"",
+                "A": 1,
+                "BS": "2+",
+                "S": 5,
+                "AP": -2,
+                "D": "D6",
+                "rules": ["PRECISION", "PSYCHIC", "ANTI-CHARACTER 4+"]
+            },
+            {
+                "name": "Shuriken Pistol",
+                "range": "12\"",
+                "A": 1,
+                "BS": "2+",
+                "S": 4,
+                "AP": -1,
+                "D": 1,
+                "rules": ["ASSAULT", "PISTOL"]
+            }
+        ],
+        "meleeWeapons": [
+            {
+                "name": "Staff of Ulthramar",
+                "range": "Melee",
+                "A": 3,
+                "WS": "2+",
+                "S": 5,
+                "AP": -1,
+                "D": 2,
+                "rules": ["PSYCHIC", "ANTI-INFANTRY 2+"]
+            }
+        ],
+        "abilities": [
+            "Leader: Guardians, Storm Guardians, Warlock Conclave",
+            "Battle Focus",
+            "Diviner of Fortunes: At the start of your Command Phase, you get 1 CP.",
+            "Doom (Psychic): At the start of your Movement phase, select one enemy unit within 18\" visible to this model. Until the start of your next Command phase, each time a friendly Aeldari model makes an attack against that target, add 1 to To Wound roll."
+        ],
+        "composition": {
+            "description": "Eldrad Ulthran with Mind War, Shuriken Pistol, Staff of Ulthramar",
+            "cost_map": [
+                { "range": "1", "cost": 110 }
+            ]
+        },
+        "keywords": [
+            "Epic Hero",
+            "Aeldari",
+            "Character",
+            "Psyker",
+            "Farseer",
+            "Eldrad Ulthran",
+            "Infantry"
+        ],
+        "faction": "Asuryani"
+    },
+    {
+        "name": "Asurmen",
+        "kind": "UnitProfile",
+        "stats": {
+            "M": "7\"",
+            "T": 3,
+            "Sv": "2+/4++",
+            "W": 5,
+            "Ld": "6+",
+            "OC": 1
+        },
+        "rangedWeapons": [
+            {
+                "name": "Bloody Twins",
+                "range": "24\"",
+                "A": 6,
+                "BS": "2+",
+                "S": 5,
+                "AP": -1,
+                "D": 2,
+                "rules": ["ASSAULT", "PISTOL"]
+            }
+        ],
+        "meleeWeapons": [
+            {
+                "name": "Sword of Azur",
+                "range": "Melee",
+                "A": 6,
+                "WS": "2+",
+                "S": 6,
+                "AP": -3,
+                "D": 3,
+                "rules": ["DEVASTATING WOUNDS"]
+            }
+        ],
+        "abilities": [
+            "Leader: Dire Avengers",
+            "Battle Focus",
+            "Tactical Acumen: While this model is leading the unit, in your Shooting Phase, when this unit has shot, it can make a Normal move of up to 6\". If it does, during this turn this unit is not eligible to declare a charge.",
+            "Hand of Azurian: Once per battle, when this model is selected to shoot, it can use this ability. If it does, until the end of the phase, its Bloody Twins have Damage characteristic of 3 and gain [ANTI-INFANTRY 3+] and [DEVASTATING WOUNDS] abilities."
+        ],
+        "composition": {
+            "description": "Asurmen with Bloody Twins and Sword of Azur",
+            "cost_map": [
+                { "range": "1", "cost": 135 }
+            ]
+        },
+        "keywords": [
+            "Infantry",
+            "Epic Hero",
+            "Character",
+            "Aeldari",
+            "Grenades",
+            "Aspect Warrior",
+            "Phoenix Lord",
+            "Asurmen"
+        ],
+        "faction": "Asuryani"
     }
+
 ];
