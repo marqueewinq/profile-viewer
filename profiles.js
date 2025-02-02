@@ -1,5 +1,57 @@
 var data = [
     {
+        name: "Army Rules",
+        kind: "ArmyRuleProfile",
+        battleFocusTokens: [
+            { size: 1000, tokens: "2 / round" },
+            { size: 2000, tokens: "4 / round" },
+            { size: 3000, tokens: "6 / round" }
+        ],
+        agileManeuvers: [
+            {
+                name: "Swift As The Wind",
+                trigger: "When an eligible unit makes a Normal, Advance or Fall Back move.",
+                effect: "Until the end of the phase, add +2\" to the unit's Move characteristic.",
+                restrictions: "Once per unit per phase."
+            },
+            {
+                name: "Flitting Shadows",
+                trigger: "When an eligible unit makes a Normal, Advance or Fall Back move, is set up on the battlefield or declares a charge.",
+                effect: "Until the end of the phase, that unit can't be targeted by Overwatch stratagem.",
+                restrictions: "Once per phase."
+            },
+            {
+                name: "Star Engines",
+                trigger: "When an eligible Vehicle unit makes a Normal move.",
+                effect: "Until the end of the phase, add D6+1\" to the unit models' Move characteristic.",
+                restrictions: "Once per phase."
+            },
+            {
+                name: "Sudden Strike",
+                trigger: "When an eligible unit from your army is selected to fight.",
+                effect: "Until the end of the phase, each time a model in that unit makes a Pile-In or Consolidate move, it can move up to 6\" instead of 3\".",
+                restrictions: "Once per phase."
+            },
+            {
+                name: "Opportunity Seized",
+                trigger: "When an enemy unit ends the Fall Back move.",
+                effect: "One eligible unit from your army that started the phase within the Engagement Range of the enemy unit can make a Normal move of up to D6+1\".",
+                restrictions: "Once per phase."
+            },
+            {
+                name: "Fade Back",
+                trigger: "In your opponent's Shooting phase, just after the enemy unit has shot.",
+                effect: "One eligible unit from your army (excluding Titanic units) that was hit by one or more enemy attacks can make a Normal move of up to D6+1\".",
+                restrictions: "Once per phase."
+            }
+        ],
+        description: [
+            "At the start of the battle round, you receive a number of Battle Focus tokens depending on the battle size.",
+            "You can spend Battle Focus tokens to perform an Agile Maneuver. A unit is eligible to perform an Agile Maneuver if it has this ability and hasn't performed an Agile Maneuver this phase. Unless otherwise stated, you can only perform an Agile Maneuver once per phase. At the end of the round, you lose any unused Battle Focus tokens."
+        ],
+        disparatePaths: "You can include Harlequin units in your army, even though they do not have the Asuryani keyword. Unless otherwise stated, Unless otherwise stated, you can't select Harlequin or Ynnari as your Army Faction."
+    },
+    {
         name: "Ghosts of the Webway",
         kind: "DetachmentProfile",
         rules: [
@@ -15,18 +67,22 @@ var data = [
         enhancements: [
             {
                 name: "Cegorach's Coil", 
+                cost: 25,
                 description: "Troupe Master model only. Each time the bearer's unit makes a Charge move, select one unit within the Engagement Range of the bearer's unit, then roll one D6 for each model in the bearer's unit that in within the Engagement Range. For each 4+, that enemy unit suffers 1 mortal wound."
             },
             {
                 name: "Mask of Secrets",
+                cost: 10,
                 description: "Shadowseer model only. Each time an enemy unit (excluding Monsters and Vehicles) within the Engagement Range of the bearer's unit Falls Back, all the models in that unit must make the Desperate Escape test. When doing so, if the enemy unit is Battle-shocked, subtract 1 from the test result."
             },
             {
                 name: "Murder's Jest",
+                cost: 20,
                 description: "Death Jester model only. Each time the bearer makes a ranged attack that targets the unit Below Half-Strength, each successful hit becomes a Critical Hit."
             },
             {
                 name: "Mistweave",
+                cost: 15,
                 description: "Shadowseer model only. While the bearer is leading the unit, models in that unit have Infiltrators ability."
             }
         ],
@@ -150,7 +206,13 @@ var data = [
             "Any number of models can replace Shuriken Cannon with Haywire Cannon",
             "Any number of models can each replace Star Bolas with Zephyrglaive"
         ],
-        composition: "2-4 Skyweavers with Shuriken Cannon, Star Bolas and Close-combat weapon",
+        composition: {
+            description: "Skyweavers with Shuriken Cannon, Star Bolas and Close-combat weapon",
+            cost_map: [
+                { range: "1-2", cost: 95 },
+                { range: "3-4", cost: 180 }
+            ]
+        },
         abilities: [
             "Battle Focus",
             "Disparate Paths",
@@ -233,9 +295,14 @@ var data = [
         options: [
             "Haywire cannon can be replaced with Prismatic Cannon"
         ],
-        composition: "1 Voidweaver with 2x Shuriken Cannon and 1x Haywire Cannon",
+        composition: {
+            description: "Voidweaver with 2x Shuriken Cannon and 1x Haywire Cannon",
+            cost_map: [
+                { range: "1", cost: 125 }
+            ]
+        },
         abilities: [
-            "Deadly Demise",
+            "Deadly Demise 1",
             "Stealth",
             "Battle Focus",
             "Disparate Paths",
@@ -292,7 +359,12 @@ var data = [
             "Disparate Paths",
             "Rapid Embarkation: At the end of the Fight phase, if there are no models currently embarked in this Transport, you can select one Harlequin Infantry unit that has 6 or fewer models and is wholly within 6\" of this Transport. Unless that unit is within the Engagement Range of enemy models, it can embark within this Transport."
         ],
-        composition: "1 Starweaver with 2x Shuriken Cannon and Close-combat weapon",
+        composition: {
+            description: "Starweaver with 2x Shuriken Cannon and Close-combat weapon",
+            cost_map: [
+                { range: "1", cost: 80 }
+            ]
+        },
         keywords: [
             "Vehicle",
             "Aeldari",
@@ -369,7 +441,12 @@ var data = [
                 rules: ["DEVASTATING WOUNDS"]
             }
         ],
-        composition: "1 Troupe Master with Shuriken Pistol, Troupe Master Blade and Flip-Belt",
+        composition: {
+            description: "Troupe Master with Shuriken Pistol, Troupe Master Blade and Flip-Belt",
+            cost_map: [
+                { range: "1", cost: 75 }
+            ]
+        },
         options: [
             "Shuriken Pistol can be replaced with Fusion Pistol or Neuro-disruptor",
             "Troupe Master Blade can be replaced with Harlequin Special Weapon"
@@ -472,7 +549,15 @@ var data = [
             "If the unit contains 9 or fewer models, up to 2 models can replace their Shuriken Pistol with a Fusion Pistol and up to 2 other models can replace their Shuriken Pistol with a Neuro-disruptor.",
             "If the unit contains 10 or more models, up to 4 models can replace their Shuriken Pistol with a Fusion Pistol and up to 4 other models can replace their Shuriken Pistol with a Neuro-disruptor."
         ],
-        composition: "1 Lead Player and 4-11 Players each with Harlequin Blade, Shuriken Pistol, and Flip Belt",
+        composition: {
+            description: "1 Lead Player and [[range]] Players with Harlequin Blade, Shuriken Pistol, and Flip Belt.",
+            cost_map: [
+                { range: "5", cost: 75 },
+                { range: "6", cost: 100 },
+                { range: "7-10", cost: 190 },
+                { range: "11", cost: 205 }
+            ]
+        },
         keywords: [
             "Infantry",
             "Aeldari",
@@ -519,7 +604,12 @@ var data = [
         wargearAbilities: [
             "Flip Belt: Each time the bearer's unit makes a Normal, Advance, Fall Back or Charge move, ignore the vertical distance when determining the range of that move."
         ],
-        composition: "1 Death Jester with Shrieker's Cannon, Jester's Blade and Flip Belt",
+        composition: {
+            description: "Death Jester with Shrieker's Cannon, Jester's Blade and Flip Belt.",
+            cost_map: [
+                { range: "1", cost: 90 }
+            ]
+        },
         abilities: [
             "Lone Operative",
             "Battle Focus",
@@ -586,7 +676,12 @@ var data = [
         options: [
             "Shuriken Pistol can be replaced with Neuro-disruptor"
         ],
-        composition: "1 Shadowseer with Shuriken Pistol, Miststave, and Flip Belt",
+        composition: {
+            description: "Shadowseer with Shuriken Pistol, Miststave, and Flip Belt",
+            cost_map: [
+                { range: "1", cost: 60 }
+            ]
+        },
         abilities: [
             "Leader: Troupe",
             "Stealth",
@@ -640,7 +735,12 @@ var data = [
             "Blitz: Once per game, in your Movement phase, before this model makes a Normal move, it can use this ability. If it does, add 2D6 to its Move characteristic and add 3 to the Solitaire Weapons' Attacks until the end of this turn.",
             "Blur of Movement: This model is eligible to declare a charge in the turn in which it Advanced."
         ],
-        composition: "1 Solitaire with Solitaire Weapons and Flip Belt",
+        composition: {
+            description: "Solitaire with Solitaire Weapons and Flip Belt",
+            cost_map: [
+                { range: "1", cost: 115 }
+            ]
+        },
         keywords: [
             "Infantry",
             "Character",
@@ -649,5 +749,263 @@ var data = [
             "Solitaire"
         ],
         faction: "Harlequins"
+    },
+    {
+        name: "Avatar of Khaine",
+        kind: "UnitProfile",
+        stats: {
+            M: "10\"",
+            T: 11,
+            Sv: "2+/4++",
+            W: 14,
+            Ld: "6+",
+            OC: 5
+        },
+        rangedWeapons: [
+            {
+                name: "Wailing Doom",
+                range: "12\"",
+                A: 1,
+                BS: "2+",
+                S: 16,
+                AP: -4,
+                D: "D6+2",
+                rules: ["SUSTAINED HITS D3"]
+            }
+        ],
+        meleeWeapons: [
+            {
+                name: "Wailing Doom (strike)",
+                range: "Melee",
+                A: 6,
+                WS: "2+",
+                S: 16,
+                AP: -4,
+                D: "D6+2",
+                rules: []
+            },
+            {
+                name: "Wailing Doom (sweep)",
+                range: "Melee",
+                A: 12,
+                WS: "2+",
+                S: 8,
+                AP: -2,
+                D: 2,
+                rules: []
+            }
+        ],
+        abilities: [
+            "Deadly Demise D3",
+            "Battle Focus",
+            "Molten Form: Each time an attack is allocated to this model, halve the damage of that attack (rounded up).",
+            "The Bloody-Handed (Aura): While a friendly Aeldari unit is within 6\" of this model, add 1 to Advance and Charge rolls for that unit.",
+        ],
+        damaged: "1-5 Wounds remaining -- subtract 1 from To Hit rolls.",
+        composition: {
+            description: "Avatar of Khaine with Wailing Doom",
+            cost_map: [
+                { range: "1", cost: 300 }
+            ]
+        },
+        keywords: [
+            "Monster",
+            "Character",
+            "Epic Hero",
+            "Aeldari",
+            "Daemon",
+            "Avatar of Khaine"
+        ],
+        faction: "Asuryani"
+    },
+    {
+        "name": "Farseer",
+        "kind": "UnitProfile",
+        "stats": {
+            "M": "7\"",
+            "T": 3,
+            "Sv": "6+/4++",
+            "W": 4,
+            "Ld": "6+",
+            "OC": 1
+        },
+        "rangedWeapons": [
+            {
+                "name": "Eldritch Storm",
+                "range": "24\"",
+                "A": "D6",
+                "BS": "3+",
+                "S": 6,
+                "AP": -2,
+                "D": "D3",
+                "rules": ["BLAST", "PSYCHIC"]
+            },
+            {
+                "name": "Shuriken Pistol",
+                "range": "12\"",
+                "A": 1,
+                "BS": "2+",
+                "S": 4,
+                "AP": -1,
+                "D": 1,
+                "rules": ["ASSAULT", "PISTOL"]
+            },
+            {
+                "name": "Singing Spear",
+                "range": "12\"",
+                "A": 1,
+                "BS": "2+",
+                "S": 8,
+                "AP": 0,
+                "D": 3,
+                "rules": ["ASSAULT", "PSYCHIC"]
+            }
+        ],
+        "meleeWeapons": [
+            {
+                "name": "Singing Spear",
+                "range": "Melee",
+                "A": 2,
+                "WS": "2+",
+                "S": 8,
+                "AP": 0,
+                "D": 3,
+                "rules": ["PSYCHIC"]
+            },
+            {
+                "name": "Witchblade",
+                "range": "Melee",
+                "A": 3,
+                "WS": "2+",
+                "S": 3,
+                "AP": 0,
+                "D": 2,
+                "rules": ["ANTI-INFANTRY 2+", "PSYCHIC"]
+            }
+        ],
+        "options": [
+            "Witchblade can be replaced with the Singing Spear"
+        ],
+        "abilities": [
+            "Leader: Guardians, Storm Guardians",
+            "Battle Focus",
+            "Branching Fates (Psychic): While this model is leading a unit, once per phase, you can change the result of one To Hit roll, one To Wound roll, or one Damage roll made by a model in that unit to an unmodified 6.",
+            "Guide (Psychic): At the end of your Movement Phase, select one friendly Aeldari unit within 18\" visible to this model. Until your next Command phase, when that unit makes an attack, add 1 to their To Hit rolls. Each unit can only be affected once per turn with this ability."
+        ],
+        "composition": {
+            "description": "Farseer with Witchblade, Eldritch Storm and Shuriken Pistol.",
+            "cost_map": [
+                { "range": "1", "cost": 70 }
+            ]
+        },
+        "keywords": [
+            "Psyker",
+            "Asuryani",
+            "Infantry",
+            "Character",
+            "Farseer"
+        ],
+        "faction": "Asuryani"
+    },
+    {
+        "name": "Farseer Skyrunner",
+        "kind": "UnitProfile",
+        "stats": {
+            "M": "14\"",
+            "T": 4,
+            "Sv": "6+/4++",
+            "W": 5,
+            "Ld": "6+",
+            "OC": 2
+        },
+        "rangedWeapons": [
+            {
+                "name": "Eldritch Storm",
+                "range": "24\"",
+                "A": "D6",
+                "BS": "3+",
+                "S": 6,
+                "AP": -2,
+                "D": "D3",
+                "rules": ["BLAST", "PSYCHIC"]
+            },
+            {
+                "name": "Shuriken Pistol",
+                "range": "12\"",
+                "A": 1,
+                "BS": "3+",
+                "S": 4,
+                "AP": -1,
+                "D": 1,
+                "rules": ["ASSAULT", "PISTOL"]
+            },
+            {
+                "name": "Singing Spear",
+                "range": "12\"",
+                "A": 1,
+                "BS": "2+",
+                "S": 8,
+                "AP": 0,
+                "D": 3,
+                "rules": ["ASSAULT", "PSYCHIC"]
+            },
+            {
+                "name": "Twin Shuriken Catapult",
+                "range": "18\"",
+                "A": 2,
+                "BS": "3+",
+                "S": 4,
+                "AP": -1,
+                "D": 1,
+                "rules": ["ASSAULT", "TWIN-LINKED"]
+            }
+        ],
+        "meleeWeapons": [
+            {
+                "name": "Singing Spear",
+                "range": "Melee",
+                "A": 2,
+                "WS": "2+",
+                "S": 8,
+                "AP": 0,
+                "D": 3,
+                "rules": ["PSYCHIC"]
+            },
+            {
+                "name": "Witchblade",
+                "range": "Melee",
+                "A": 3,
+                "WS": "2+",
+                "S": 3,
+                "AP": 0,
+                "D": 2,
+                "rules": ["ANTI-INFANTRY 2+", "PSYCHIC"]
+            }
+        ],
+        "options": [
+            "Witchblade can be replaced with the Singing Spear"
+        ],
+        "abilities": [
+            "Leader: Windriders, Warlock Skyrunners",
+            "Battle Focus",
+            "Branching Fates (Psychic): While this model is leading a unit, once per phase, you can change the result of one To Hit roll, one To Wound roll, or one Damage roll made by a model in that unit to an unmodified 6.",
+            "Misfortune (Psychic): At the end of your Movement Phase, select one enemy unit within 18\" visible to this model. Until your next Command phase, when that unit makes an attack, subtract 1 from their To Wound rolls. Each unit can only be affected once per turn with this ability."
+        ],
+        "composition": {
+            "description": "1 Farseer Skyrunner with Eldritch Storm, Witchblade, Shuriken Pistol, and Twin Shuriken Catapult",
+            "cost_map": [
+                { "range": "1", "cost": 80 }
+            ]
+        },
+        "keywords": [
+            "Psyker",
+            "Asuryani",
+            "Mounted",
+            "Character",
+            "Farseer",
+            "Fly",
+            "Farseer Skyrunner"
+        ],
+        "faction": "Asuryani"
     }
 ];

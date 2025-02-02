@@ -3,7 +3,8 @@ app.controller("ProfileController", function ($scope, $sce) {
     // Define an enum-like object for profile kinds
     const ProfileKind = {
         UNIT: 'UnitProfile',
-        DETACHMENT: 'DetachmentProfile'
+        DETACHMENT: 'DetachmentProfile',
+        ARMY_RULE: 'ArmyRuleProfile'
     };
 
     $scope.profiles = data.filter(profile => profile.kind === ProfileKind.UNIT);
@@ -12,6 +13,9 @@ app.controller("ProfileController", function ($scope, $sce) {
     $scope.menuOpen = false;
     $scope.searchText = '';
     $scope.activeFilter = ProfileKind.UNIT; // Default filter
+
+    // Define available factions
+    $scope.factions = ['Asuryani', 'Harlequins'];
 
     $scope.$watchGroup(['searchText', 'activeFilter'], function() {
         $scope.filteredProfiles = data.filter(profile => {
@@ -25,20 +29,10 @@ app.controller("ProfileController", function ($scope, $sce) {
         $scope.activeFilter = kind;
     };
 
-    $scope.filterByName = function(name) {
+    $scope.filterByKind = function(kind, name) {
         $scope.searchText = name;
-        $scope.activeFilter = ProfileKind.UNIT;
+        $scope.activeFilter = kind;
         $scope.menuOpen = false;
-    };
-
-    $scope.filterByDetachment = function(name) {
-        $scope.searchText = name;
-        $scope.activeFilter = ProfileKind.DETACHMENT;
-        $scope.menuOpen = false;
-    };
-
-    $scope.showDescription = function (ruleName) {
-        $scope.selectedRule = ruleName;
     };
 
     $scope.hideDescription = function () {
@@ -72,12 +66,18 @@ app.controller("ProfileController", function ($scope, $sce) {
         $scope.activeFilter = ProfileKind.UNIT; // Reset to default filter
     };
 
-    // Initialize filteredProfiles
-    $scope.filteredProfiles = data.filter(profile => profile.kind === $scope.activeFilter);
+    // Function to filter profiles by selected faction
+    $scope.filterByFaction = function(faction) {
+        $scope.selectedFaction = faction;
+        if ($scope.selectedFaction) {
+            $scope.filteredProfiles = $scope.profiles.filter(profile => profile.faction === $scope.selectedFaction);
+        } else {
+            $scope.filteredProfiles = $scope.profiles; // Show all profiles if no faction is selected
+        }
+    };
 
-    console.log('Profiles:', $scope.profiles);
-    console.log('Detachments:', $scope.detachments);
-    console.log('Filtered Profiles:', $scope.filteredProfiles);
+    // Initialize filteredProfiles
+    $scope.filteredProfiles = $scope.profiles;
 
     // Initialize theme icon based on cookie
     $scope.themeIcon = getCookie('UserPreferences') === 'dark' ? '☀️' : '🌙';
@@ -98,5 +98,9 @@ app.controller("ProfileController", function ($scope, $sce) {
             $scope.themeIcon = '🌙'; // Moon emoji for light theme
             console.log('Light theme enabled');
         }
+    };
+
+    $scope.formatCompositionDescription = function(description, range) {
+        return description.includes('[[range]]') ? description.replace('[[range]]', range) : `${range} ${description}`;
     };
 });
