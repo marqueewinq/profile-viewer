@@ -334,7 +334,7 @@
                                             <strong>{{ enhancement.name }}</strong>
                                             <div style="display: flex; align-items: center;">
                                                 <span class="cost-points">{{ enhancement.cost }} ⊗</span>
-                                                <button class="filter-button small-button" ng-click="enhancements[enhancement.name] ? removeEnhancement(enhancement) : addEnhancement(enhancement)" ng-class="{active: enhancements[enhancement.name]}">
+                                                <button ng-if="isArmyBuilderEnabled" class="filter-button small-button" ng-click="enhancements[enhancement.name] ? removeEnhancement(enhancement) : addEnhancement(enhancement)" ng-class="{active: enhancements[enhancement.name]}">
                                                     <span ng-if="enhancements[enhancement.name]">✔</span>
                                                     <span ng-if="!enhancements[enhancement.name]">○</span>
                                                     {{ enhancements[enhancement.name] ? 'Remove' : 'Add' }}

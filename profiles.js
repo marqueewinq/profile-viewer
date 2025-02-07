@@ -1879,7 +1879,7 @@ var data = [
             "Assured Destruction: In your Shooting Phase, each time a model in this unit makes a ranged attack targeting a Monster or Vehicle, you can re-roll To Hit, To Wound, and Damage rolls."
         ],
         "composition": {
-            "description": "Fire Dragon Exarch and [[range]] Fire Dragons",
+            "description": "1 Fire Dragon Exarch and [[range]] Fire Dragons",
             "cost_map": [
                 { "range": "4", "cost": 100 },
                 { "range": "5-9", "cost": 200 }
