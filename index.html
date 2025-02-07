@@ -134,7 +134,32 @@
                 </div>
             </div>
             <div class="container" ng-click="closeMenus()">
-                <h1>Aeldari Datasheets</h1>
+                <div class="header-row">
+                    <h1>Aeldari Datasheets</h1>
+                    <button class="toggle-visibility-button" ng-click="toggleTextVisibility()">
+                        {{ isTextVisible ? 'Hide' : 'Show' }}
+                    </button>
+                </div>
+                <div ng-show="isTextVisible">
+                    <p>
+                        I've implemented this simple profile viewer for the new Aeldari codex as a hobby project.
+                    </p>
+                    <p>
+                        If you want to add a profile, please make a PR to <a class="text" href="https://github.com/marqueewinq/profile-viewer">[the Github repository]</a>.
+                    </p>
+                    <p>
+                        Tech Stack:
+                        <ul>
+                            <li> <a class="text" href="https://github.com/tesseract-ocr/tesseract">[Tesseract OCR]</a> for image to text conversion. </li>
+                            <li> <a class="text" href="https://chatgpt.com">[ChatGPT]</a> for the data entry and cleanup. </li>
+                            <li> <a class="text" href="https://angular.io">[Angular.js]</a> for the frontend. </li>
+                            <li> <a class="text" href="https://feathericons.com">[Feather icons]</a> for the icons. </li>
+                        </ul>
+                    </p>
+                    <p>
+                        With love, <a class="text" href="https://marqueewinq.xyz" target="_blank">[marqueewinq]</a>.
+                    </p>
+                </div>
                 <div class="search-container">
                     <input
                         type="text"

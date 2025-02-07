@@ -1091,3 +1091,39 @@ tr:nth-child(even) {
     padding: 5px;
     background-color: var(--container-background);
 }
+
+.text {
+    color: var(--text-color);
+    text-decoration: none;
+}
+
+.text:hover {
+    text-decoration: underline;
+}
+
+.header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.header-row h1 {
+    margin: 0;
+    font-size: 1.5em;
+    color: var(--header-color);
+}
+
+.toggle-visibility-button {
+    background-color: var(--primary-color);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.toggle-visibility-button:hover {
+    background-color: var(--secondary-color);
+}
