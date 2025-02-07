@@ -12,7 +12,7 @@
     --subheader-color: #555;
     --menu-background: #333;
     --menu-text-color: #fff;
-    --menu-hover-background: #444;
+    --menu-hover-background: #ccc;
     --table-header-background: #f0f0f0;
     --table-row-background: #f9f9f9;
     --rule-description-background: #e7f3fe;
@@ -36,7 +36,7 @@
     --subheader-color: #ccc;
     --menu-background: #222;
     --menu-text-color: #f4f4f9;
-    --menu-hover-background: #333;
+    --menu-hover-background: #555;
     --table-header-background: #444;
     --table-row-background: #333;
     --rule-description-background: #333;
@@ -64,6 +64,8 @@ h4 {
 
 .container {
     max-width: 800px;
+    margin-top: 0;
+    padding-top: 0;
     margin: 20px auto;
     padding: 20px;
     background-color: var(--container-background);
@@ -196,37 +198,71 @@ tr:nth-child(even) {
     position: fixed;
     top: 0;
     left: 0;
-    width: 250px;
+    width: 320px;
     height: 100%;
-    background-color: var(--menu-background);
-    color: var(--menu-text-color);
+    background-color: var(--container-background);
+    color: var(--text-color);
     padding: 20px;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
     transform: translateX(-100%);
     transition: transform 0.3s ease;
     z-index: 1000;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .side-menu.open {
     transform: translateX(0);
 }
 
-.side-menu h3 {
-    color: var(--menu-text-color);
-    margin-bottom: 20px;
+.side-menu h2 {
+    cursor: pointer;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 5px 0;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 10px;
+    color: var(--header-color);
+}
+
+.side-menu h2::before {
+    content: attr(data-icon);
+    font-size: 1.2em;
+    color: var(--header-color);
+    margin-right: 10px;
 }
 
 .side-menu a {
     display: block;
-    color: var(--menu-text-color);
+    color: var(--text-color);
     text-decoration: none;
     margin-bottom: 10px;
-    padding: 5px 0;
+    padding: 5px 20px;
     border-bottom: 1px solid var(--border-color);
 }
 
 .side-menu a:hover {
     background-color: var(--menu-hover-background);
+}
+
+.side-menu h3 {
+    cursor: pointer;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 2px 10px;
+    margin: 10px 0;
+    color: var(--header-color);
+    border-bottom: 1px solid var(--border-color);
+    font-size: 1.1em;
+}
+
+.side-menu h3::before {
+    content: attr(data-icon);
+    font-size: 1.2em;
+    color: var(--header-color);
+    margin-right: 10px;
 }
 
 .toggle-button {
@@ -256,14 +292,20 @@ tr:nth-child(even) {
 }
 
 .close-button {
+    background-color: transparent;
+    border: none;
+    color: var(--text-color);
+    font-size: 1.5em;
+    cursor: pointer;
     position: absolute;
     top: 10px;
     right: 10px;
-    background-color: transparent;
-    color: var(--menu-text-color);
-    border: none;
-    font-size: 1.5em;
-    cursor: pointer;
+    z-index: 1001;
+    transition: color 0.3s ease;
+}
+
+.close-button:hover {
+    color: var(--primary-color);
 }
 
 .entry-count {
@@ -275,6 +317,7 @@ tr:nth-child(even) {
     display: flex;
     justify-content: center;
     margin-top: 10px;
+    flex-wrap: wrap;
 }
 
 .button-common {
@@ -339,6 +382,15 @@ tr:nth-child(even) {
     font-size: 0.9em;
 }
 
+/* Media query for mobile view */
+@media (max-width: 600px) {
+    .filter-button {
+        padding: 3px 8px;
+        font-size: 0.8em;
+        margin-bottom: 5px;
+    }
+}
+
 .filter-button.active {
     background-color: var(--primary-color);
     color: #fff;
@@ -401,6 +453,53 @@ tr:nth-child(even) {
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
     margin-bottom: 20px;
+}
+
+.battle-focus-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.battle-focus-desctiption-section,
+.battle-focus-tokens-section {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Media query for mobile view */
+@media (max-width: 600px) {
+    .enhancements-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(4, auto);
+    }
+
+    .stratagems-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(6, auto);
+    }
+
+    .agile-maneuvers-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(6, auto);
+    }
+
+    .battle-focus-container {
+        flex-direction: column;
+        /* Stack sections vertically */
+    }
+
+    .battle-focus-desctiption-section,
+    .battle-focus-tokens-section {
+        flex: 0;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 10px;
+        display: block;
+    }
 }
 
 .enhancement-card,
@@ -529,9 +628,9 @@ tr:nth-child(even) {
 }
 
 .cost-points {
+    margin-right: 10px;
     color: var(--header-color);
     font-weight: bold;
-    font-size: 1em;
 }
 
 .enhancement-header {
@@ -544,6 +643,7 @@ tr:nth-child(even) {
 }
 
 .enhancement-header strong {
+    flex-grow: 1;
     color: var(--header-color);
     font-size: 1.1em;
 }
@@ -622,6 +722,7 @@ tr:nth-child(even) {
     display: flex;
     justify-content: center;
     margin-top: 10px;
+    flex-wrap: wrap;
 }
 
 .faction-filter-buttons .filter-button {
@@ -637,6 +738,15 @@ tr:nth-child(even) {
     align-items: center;
     justify-content: center;
     font-size: 0.9em;
+}
+
+/* Media query for mobile view */
+@media (max-width: 600px) {
+    .faction-filter-buttons .filter-button {
+        padding: 3px 8px;
+        font-size: 0.8em;
+        margin-bottom: 5px;
+    }
 }
 
 .faction-filter-buttons .filter-button.active {
@@ -655,4 +765,329 @@ tr:nth-child(even) {
 
 .faction-filter-buttons .filter-button span {
     margin-right: 5px;
+}
+
+.dimmed {
+    opacity: 0.5;
+    color: var(--dimmed-text-color);
+}
+
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+}
+
+.loading-spinner {
+    border: 8px solid #f3f3f3;
+    border-top: 8px solid #3498db;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 1s linear infinite;
+    margin-bottom: 20px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Media query for mobile view */
+@media (max-width: 600px) {
+    .loading-overlay {
+        font-size: 14px;
+    }
+
+    .loading-spinner {
+        width: 40px;
+        height: 40px;
+        border-width: 6px;
+    }
+}
+
+.weapons-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.weapons-table th, .weapons-table td {
+    padding: 8px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.weapons-table th {
+    background-color: var(--table-header-background);
+    color: var(--header-color);
+}
+
+.weapons-table th:nth-child(1), .weapons-table td:nth-child(1) {
+    width: 58%;
+}
+
+.weapons-table th:nth-child(2), .weapons-table td:nth-child(2),
+.weapons-table th:nth-child(3), .weapons-table td:nth-child(3),
+.weapons-table th:nth-child(4), .weapons-table td:nth-child(4),
+.weapons-table th:nth-child(5), .weapons-table td:nth-child(5),
+.weapons-table th:nth-child(6), .weapons-table td:nth-child(6),
+.weapons-table th:nth-child(7), .weapons-table td:nth-child(7) {
+    width: 7%;
+}
+
+.weapons-table .weapon-rules {
+    font-size: 0.75em;
+    font-weight: bolder;
+    color: var(--text-color);
+    display: inline-block;
+    margin-left: 5px;
+    background-color: var(--rule-background-color);
+    padding: 2px 5px;
+    border-radius: 3px;
+}
+
+.army-builder-toggle {
+    right: 20px;
+    background-color: var(--primary-color);
+    color: #fff;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 1001;
+    transition: opacity 0.3s ease;
+    font-size: 1.0em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    position: fixed;
+    top: 20px;
+}
+
+
+.army-builder-menu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 350px;
+    height: 100%;
+    background-color: var(--container-background);
+    color: var(--text-color);
+    padding: 20px;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    z-index: 1000;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-bottom: 20px;
+}
+
+.army-builder-menu.open {
+    transform: translateX(0);
+}
+
+.army-builder-menu > div:last-child {
+    margin-bottom: 40px;
+}
+
+.army-controls {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 5px;
+}
+
+.army-controls button {
+    background-color: var(--primary-color);
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 40px;
+    text-align: center;
+}
+
+.army-controls button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.army-controls span {
+    font-weight: bold;
+    margin: 0 5px;
+}
+
+.army-builder-menu a {
+    color: var(--text-color);
+    text-decoration: none;
+    margin-left: 10px;
+}
+
+.army-builder-menu a:hover {
+    text-decoration: underline;
+}
+
+.army-builder-menu h3 {
+    cursor: pointer;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 2px 10px;
+    margin: 10px 0;
+    color: var(--menu-text-color);
+    border-bottom: 1px solid var(--border-color);
+    font-size: 1.1em;
+}
+
+.army-builder-menu select {
+    background-color: var(--container-background);
+    color: var(--header-color);
+    border: 1px solid var(--border-color);
+    font-weight: bold;
+    border-radius: 4px;
+    padding: 5px;
+    margin-right: 10px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.army-builder-menu select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 5px var(--primary-color);
+}
+
+.army-builder-menu span {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    padding: 5px 0;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--menu-text-color);
+}
+
+.army-builder-menu span > div {
+    display: flex;
+    align-items: center;
+}
+
+.icon {
+    cursor: pointer;
+    margin-left: 5px;
+    transition: color 0.3s ease;
+    width: 20px;
+    height: 20px;
+    color: var(--text-color);
+}
+
+.icon:hover {
+    color: var(--primary-color);
+}
+
+.army-panel-controls-button {
+    background-color: var(--primary-color);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 0.8em;
+    display: inline-block;
+    text-align: center;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.army-panel-controls-button:hover {
+    background-color: var(--secondary-color);
+}
+
+.small-button {
+    padding: 5px 10px;
+    font-size: 0.7em;
+    border-radius: 4px;
+    background-color: var(--primary-color);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: inline-block; 
+    text-align: center;
+    width: 80px;
+}
+
+.small-button:hover {
+    background-color: var(--secondary-color);
+}
+
+/* Assuming you have styles for unit profiles, apply similar styles to enhancements */
+.enhancement-item {
+    background-color: var(--container-background);
+    border-radius: 4px;
+    padding: 5px;
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--text-color);
+}
+
+.enhancement-item .cost-points {
+    color: var(--header-color);
+    font-weight: bold;
+}
+
+.enhancement-name {
+    color: var(--text-color);
+}
+
+.enhancement-item .icon {
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.enhancement-item .icon:hover {
+    color: var(--primary-color);
+}
+
+/* Hide toggle buttons when either menu is open */
+.menu-open .toggle-button,
+.army-open .toggle-button {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.footnote-section {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: var(--section-background);
+    border-radius: 8px;
+}
+
+.footnote-section ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.footnote-section li {
+    font-size: 0.8em;
+    margin-bottom: 5px;
+    padding: 5px;
+    background-color: var(--container-background);
 }

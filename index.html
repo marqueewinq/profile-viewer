@@ -15,272 +15,417 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular.min.js"></script>
         <link rel="stylesheet" href="style.css">
     </head>
-    <body ng-controller="ProfileController" ng-click="hideDescription()">
-        <img src="https://marqueewinq.xyz/apvt.png" width="1" height="1" style="display:none;" />
-        <div class="theme-toggle toggle-button" ng-class="{hidden: menuOpen}" ng-click="toggleTheme()" title="Toggle between light and dark theme">
-            {{ themeIcon }}
+    <body ng-controller="ProfileController" ng-class="{'menu-open': menuOpen, 'army-open': armyBuilderOpen}" ng-click="hideDescription()">
+        <div class="loading-overlay" ng-show="loading">
+            <div class="loading-spinner"></div>
+            <p>Loading, please wait...</p>
         </div>
-        <div class="menu-toggle toggle-button" ng-class="{hidden: menuOpen}" ng-click="toggleMenu($event)">☰</div>
-        <div class="side-menu" ng-class="{open: menuOpen}" ng-click="$event.stopPropagation()">
-            <button class="close-button" ng-click="toggleMenu($event)">✖</button>
-            <h3>Army Rules</h3>
-            <a href="#" ng-click="filterByKind('ArmyRuleProfile', '')">Army Rules</a>
-            <h3>Detachments</h3>
-            <a href="#" ng-repeat="detachment in detachments" ng-click="filterByKind('DetachmentProfile', detachment.name)">{{ detachment.name }}</a>
-            <h3>Profiles</h3>
-            <a href="#" ng-repeat="profile in profiles" ng-click="filterByKind('UnitProfile', profile.name)">{{ profile.name }}</a>
-        </div>
-        <div class="container" ng-click="closeMenu()">
-            <h1>Aeldari Datasheets</h1>
-            <div class="search-container">
-                <input
-                    type="text"
-                    ng-model="searchText"
-                    placeholder="Search by name..."
-                />
-                <button class="reset-button" ng-click="resetFilters()">Reset</button>
+        <div ng-show="!loading">
+            <img src="https://marqueewinq.xyz/apvt.png" width="1" height="1" style="display:none;" />
+            <div class="theme-toggle toggle-button" ng-class="{hidden: menuOpen}" ng-click="toggleTheme()" title="Toggle between light and dark theme">
+                {{ themeIcon }}
             </div>
-            <div class="faction-filter-buttons">
-                <button class="filter-button" ng-click="filterByFaction(''); searchText=''" ng-class="{active: !selectedFaction}">
-                    <span ng-if="!selectedFaction">✔</span>
-                    <span ng-if="selectedFaction">○</span>
-                    All Factions
-                </button>
-                <button class="filter-button" ng-repeat="faction in factions" ng-click="filterByFaction(faction); searchText=''" ng-class="{active: selectedFaction === faction}">
-                    <span ng-if="selectedFaction === faction">✔</span>
-                    <span ng-if="selectedFaction !== faction">○</span>
-                    {{ faction }}
-                </button>
+            <div class="menu-toggle toggle-button" ng-class="{hidden: menuOpen}" ng-click="toggleMenu($event)">☰</div>
+            <div ng-if="isArmyBuilderEnabled">
+                <div class="army-builder-toggle toggle-button" ng-class="{hidden: armyBuilderOpen}" ng-click="toggleArmyBuilder($event)">⚔️</div>
             </div>
-            <div class="filter-buttons">
-                <button class="filter-button" ng-click="toggleFilter('UnitProfile'); searchText=''" ng-class="{active: activeFilter === 'UnitProfile'}">
-                    <span ng-if="activeFilter === 'UnitProfile'">✔</span>
-                    <span ng-if="activeFilter !== 'UnitProfile'">○</span>
-                    Unit Profiles
-                </button>
-                <button class="filter-button" ng-click="toggleFilter('DetachmentProfile'); searchText=''" ng-class="{active: activeFilter === 'DetachmentProfile'}">
-                    <span ng-if="activeFilter === 'DetachmentProfile'">✔</span>
-                    <span ng-if="activeFilter !== 'DetachmentProfile'">○</span>
-                    Detachments
-                </button>
-                <button class="filter-button" ng-click="toggleFilter('ArmyRuleProfile'); searchText=''" ng-class="{active: activeFilter === 'ArmyRuleProfile'}">
-                    <span ng-if="activeFilter === 'ArmyRuleProfile'">✔</span>
-                    <span ng-if="activeFilter !== 'ArmyRuleProfile'">○</span>
-                    Army Rules
-                </button>
-            </div>
-            <div class="entry-count" style="color: grey; text-align: center; margin-top: 10px;">
-                {{ filteredProfiles.length }} {{ filteredProfiles.length > 1 ? "entries" : "entry" }}.
-            </div>
-
-            <div class="profile" ng-repeat="profile in filteredProfiles">
-                <div ng-if="profile.kind === 'UnitProfile'">
-                    <div class="profile-header">
-                        <div class="profile-info">
-                            <h2>{{ profile.name }}</h2>
-                            <h3>{{ profile.faction }}</h3>
+            <div class="side-menu" ng-class="{open: menuOpen}" ng-click="$event.stopPropagation()">
+                <button class="close-button" ng-click="toggleMenu($event)">✖</button>
+                <div class="menu-actions">
+                    <a href="#" ng-click="collapseAll()">Collapse All</a>                
+                    <a href="#" ng-click="expandAll()">Expand All</a>
+                </div>
+                <h2 ng-click="toggleSection('armyRules')" data-icon="{{ sections.armyRules ? '-' : '+' }}">Army Rules</h2>
+                <div ng-show="sections.armyRules">
+                    <a href="#" ng-click="filterByKind('ArmyRuleProfile', '')">Army Rules</a>
+                </div>
+                <h2 ng-click="toggleSection('detachments')" data-icon="{{ sections.detachments ? '-' : '+' }}">Detachments</h2>
+                <div ng-show="sections.detachments">
+                    <a href="#" ng-repeat="detachment in detachments"
+                       ng-click="filterByKind('DetachmentProfile', detachment.name)" 
+                       ng-class="{'dimmed': detachment.ready === false}">
+                        {{ detachment.name }}
+                    </a>
+                </div>
+                <h2 ng-click="toggleSection('profiles')" data-icon="{{ sections.profiles ? '-' : '+' }}">Profiles</h2>
+                <div ng-show="sections.profiles">
+                    <div ng-repeat="faction in factions">
+                        <h3 ng-click="toggleFaction(faction)" data-icon="{{ factionSideMenuOpenCloseStates[faction] ? '-' : '+' }}">{{ faction }}</h3>
+                        <div ng-show="factionSideMenuOpenCloseStates[faction]">
+                            <a href="#" ng-repeat="profile in profiles | filter: {faction: faction}" 
+                               ng-click="filterByKind('UnitProfile', profile.name)"
+                               ng-class="{'dimmed': profile.ready === false}">
+                               {{ formatSideMenuName(profile) }}
+                            </a>
                         </div>
                     </div>
-                    <table class="stats-table">
-                        <tr>
-                            <th>M</th>
-                            <th>T</th>
-                            <th>Sv</th>
-                            <th>W</th>
-                            <th>Ld</th>
-                            <th>OC</th>
-                        </tr>
-                        <tr>
-                            <td>{{ profile.stats.M }}</td>
-                            <td>{{ profile.stats.T }}</td>
-                            <td>{{ profile.stats.Sv }}</td>
-                            <td>{{ profile.stats.W }}</td>
-                            <td>{{ profile.stats.Ld }}</td>
-                            <td>{{ profile.stats.OC }}</td>
-                        </tr>
-                    </table>
-                    <table class="weapons-table" ng-if="profile.rangedWeapons.length">
-                        <tr>
-                            <th>Ranged Weapons</th>
-                            <th>Rng</th>
-                            <th>A</th>
-                            <th>BS</th>
-                            <th>S</th>
-                            <th>AP</th>
-                            <th>D</th>
-                        </tr>
-                        <tr ng-repeat="weapon in profile.rangedWeapons">
-                            <td>
-                                {{ weapon.name }}
-                                <span ng-if="weapon.rules.length">
-                                    <span ng-repeat="rule in weapon.rules">
-                                        [{{ rule }}]
+                </div>
+            </div>
+            <div ng-if="isArmyBuilderEnabled">
+                <div class="army-builder-menu" ng-class="{open: armyBuilderOpen}" ng-click="$event.stopPropagation()">
+                    <button class="close-button" ng-click="toggleArmyBuilder($event)">✖</button>
+                    <h2>Army Builder</h2>
+                    <div>
+                        <strong>Total Points: {{ calculateTotalPoints() }} ⊗</strong>
+                    </div>
+                    <div id="armyPanel">
+                        <button class="army-panel-controls-button" ng-click="clearArmy()">
+                            <i class="icon" data-feather="trash-2"></i>
+                        </button>
+                        <button class="army-panel-controls-button" ng-click="downloadArmy()">
+                            <i class="icon" data-feather="download"></i>
+                        </button>
+                    </div>
+                    <div ng-if="detachment">
+                        <h3>Detachment</h3>
+                        <div>
+                            <span>
+                                <div style="flex-grow: 1; display: flex; align-items: center;">
+                                    <a href="#" ng-click="filterByKind('DetachmentProfile', detachment.name)">
+                                        {{ detachment.name }}
+                                    </a>
+                                </div>
+                                <div>
+                                    <span ng-click="removeDetachment()" class="icon" title="Remove">
+                                        <i class="icon" data-feather="x"></i>
                                     </span>
-                                </span>
-                            </td>
-                            <td>{{ weapon.range }}</td>
-                            <td>{{ weapon.A }}</td>
-                            <td>{{ weapon.BS }}</td>
-                            <td>{{ weapon.S }}</td>
-                            <td>{{ weapon.AP }}</td>
-                            <td>{{ weapon.D }}</td>
-                        </tr>
-                    </table>
-                    <table class="weapons-table" ng-if="profile.meleeWeapons.length">
-                        <tr>
-                            <th>Melee Weapons</th>
-                            <th>Rng</th>
-                            <th>A</th>
-                            <th>WS</th>
-                            <th>S</th>
-                            <th>AP</th>
-                            <th>D</th>
-                        </tr>
-                        <tr ng-repeat="weapon in profile.meleeWeapons">
-                            <td>
-                                {{ weapon.name }}
-                                <span ng-if="weapon.rules.length">
-                                    <span ng-repeat="rule in weapon.rules" ng-click="showDescription(rule)">
-                                        [{{ rule }}]
+                                </div>
+                            </span>
+                            <div>
+                                <div ng-repeat="(name, enhancement) in enhancements" class="enhancement-item">
+                                    <div style="flex-grow: 1; display: flex; align-items: center; margin-left: 30px;">
+                                        <span class="cost-points">{{ enhancement.cost }} ⊗</span>
+                                        <span class="enhancement-name">{{ enhancement.name }}</span>
+                                    </div>
+                                    <div>
+                                        <span ng-click="removeEnhancement(enhancement)" class="icon" title="Remove">
+                                            <i class="icon" data-feather="x"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-repeat="category in armyCategories" ng-if="armyEntriesByCategory[category.name] && armyEntriesByCategory[category.name].length > 0">
+                        <h3>{{ category.name }}</h3>
+                        <div>
+                            <span ng-repeat="entry in armyEntriesByCategory[category.name] track by entry.id">
+                                <div style="flex-grow: 1; display: flex; align-items: center;">
+                                    <select ng-model="entry.selectedOption" ng-options="option.range as option.cost + ' ⊗' for option in getProfileByName(entry.name).composition.cost_map" ng-init="entry.selectedOption = entry.selectedOption || getProfileByName(entry.name).composition.cost_map[0].range">
+                                    </select>
+                                    <a href="#" ng-click="filterByKind('UnitProfile', entry.name)">
+                                        {{ entry.selectedOption ? entry.selectedOption + ' ' + entry.name : entry.name }}
+                                    </a>
+                                </div>
+                                <div>
+                                    <span ng-click="copyEntry(entry)" class="icon" title="Copy">
+                                        <i class="icon" data-feather="copy"></i>
                                     </span>
-                                </span>
-                            </td>
-                            <td>{{ weapon.range }}</td>
-                            <td>{{ weapon.A }}</td>
-                            <td>{{ weapon.WS }}</td>
-                            <td>{{ weapon.S }}</td>
-                            <td>{{ weapon.AP }}</td>
-                            <td>{{ weapon.D }}</td>
-                        </tr>
-                    </table>
-                    <div class="text-left">
-                        <div ng-if="profile.abilities.length">
-                            <h4>Abilities</h4>
-                            <ul>
-                                <li ng-repeat="ability in profile.abilities" ng-bind-html="safeHTML(ability)"></li>
-                            </ul>
+                                    <span ng-click="removeEntry(entry)" class="icon" title="Remove">
+                                        <i class="icon" data-feather="x"></i>
+                                    </span>
+                                </div>
+                            </span>
                         </div>
-                        <div ng-if="profile.damaged">
-                            <p><b>Damaged:</b> <span style="font-weight: normal;">{{ profile.damaged }}</span></p>
+                    </div>
+                    <div ng-if="getArmyCount() === 0 && !detachment && Object.keys(enhancements).length === 0">
+                        <p>Your army will appear here!</p>
+                    </div>
+                </div>
+            </div>
+            <div class="container" ng-click="closeMenus()">
+                <h1>Aeldari Datasheets</h1>
+                <div class="search-container">
+                    <input
+                        type="text"
+                        ng-model="searchText"
+                        placeholder="Search by name..."
+                    />
+                    <button class="reset-button" ng-click="resetFilters()">Reset</button>
+                </div>
+                <div class="faction-filter-buttons">
+                    <button class="filter-button" ng-click="filterByFaction(''); searchText=''" ng-class="{active: !selectedFaction}">
+                        <span ng-if="!selectedFaction">✔</span>
+                        <span ng-if="selectedFaction">○</span>
+                        All Factions
+                    </button>
+                    <button class="filter-button" ng-repeat="faction in factions" ng-click="filterByFaction(faction); searchText=''" ng-class="{active: selectedFaction === faction}">
+                        <span ng-if="selectedFaction === faction">✔</span>
+                        <span ng-if="selectedFaction !== faction">○</span>
+                        {{ faction }}
+                    </button>
+                </div>
+                <div class="filter-buttons">
+                    <button class="filter-button" ng-click="toggleFilter('UnitProfile'); searchText=''" ng-class="{active: activeFilter === 'UnitProfile'}">
+                        <span ng-if="activeFilter === 'UnitProfile'">✔</span>
+                        <span ng-if="activeFilter !== 'UnitProfile'">○</span>
+                        Unit Profiles
+                    </button>
+                    <button class="filter-button" ng-click="toggleFilter('DetachmentProfile'); searchText=''" ng-class="{active: activeFilter === 'DetachmentProfile'}">
+                        <span ng-if="activeFilter === 'DetachmentProfile'">✔</span>
+                        <span ng-if="activeFilter !== 'DetachmentProfile'">○</span>
+                        Detachments
+                    </button>
+                    <button class="filter-button" ng-click="toggleFilter('ArmyRuleProfile'); searchText=''" ng-class="{active: activeFilter === 'ArmyRuleProfile'}">
+                        <span ng-if="activeFilter === 'ArmyRuleProfile'">✔</span>
+                        <span ng-if="activeFilter !== 'ArmyRuleProfile'">○</span>
+                        Army Rules
+                    </button>
+                </div>
+                <div class="entry-count" style="color: grey; text-align: center; margin-top: 10px;">
+                    {{ filteredProfiles.length }} {{ filteredProfiles.length > 1 ? "entries" : "entry" }}.
+                </div>
+
+                <div class="profile" ng-repeat="profile in filteredProfiles">
+                    <div ng-if="profile.kind === 'UnitProfile'">
+                        <div class="profile-header">
+                            <div class="profile-info">
+                                <h2>{{ profile.name }}</h2>
+                                <h3>{{ profile.faction }}</h3>
+                            </div>
+                            <div class="army-controls" ng-if="isArmyBuilderEnabled">
+                                <button ng-click="removeFromArmy(profile)" ng-disabled="!getArmyEntryCountByName(profile.name)">-1</button>
+                                <span>{{ getArmyEntryCountByName(profile.name) }}</span>
+                                <button ng-click="addToArmy(profile)" ng-class="{active: isInArmy(profile)}">
+                                    <span ng-if="isInArmy(profile)">✔</span>
+                                    <span ng-if="!isInArmy(profile)">○</span>
+                                    {{ isInArmy(profile) ? 'Remove from Army' : 'Add to Army' }}
+                                </button>
+                            </div>
                         </div>
-                        <div ng-if="profile.wargearAbilities && profile.wargearAbilities.length">
-                            <h4>Wargear Abilities</h4>
-                            <ul>
-                                <li ng-repeat="wargearAbility in profile.wargearAbilities">{{ wargearAbility }}</li>
-                            </ul>
-                        </div>
-                        <b>Composition:</b>
-                        <table class="invisible-table" style="font-weight: normal;">
-                            <tr ng-repeat="costItem in profile.composition.cost_map | orderBy:'cost'">
-                                <td style="text-align: right; white-space: nowrap;"><span class="cost-points">{{ costItem.cost }} ⊗</span></td>
-                                <td>{{ formatCompositionDescription(profile.composition.description, costItem.range) }}</td>
+                        <table class="stats-table" ng-if="profile.stats">
+                            <tr>
+                                <th>M</th>
+                                <th>T</th>
+                                <th>Sv</th>
+                                <th>W</th>
+                                <th>Ld</th>
+                                <th>OC</th>
+                            </tr>
+                            <tr>
+                                <td>{{ profile.stats.M }}</td>
+                                <td>{{ profile.stats.T }}</td>
+                                <td>{{ profile.stats.Sv }}</td>
+                                <td>{{ profile.stats.W }}</td>
+                                <td>{{ profile.stats.Ld }}</td>
+                                <td>{{ profile.stats.OC }}</td>
                             </tr>
                         </table>
-                        <div ng-if="profile.options.length">
-                            <h4>Options</h4>
-                            <ul>
-                                <li ng-repeat="option in profile.options">{{ option }}</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="keywords">
-                        <span ng-repeat="keyword in profile.keywords.sort()">{{ keyword.toUpperCase() }}</span>
-                    </div>
-                </div>
-
-                <div ng-if="profile.kind === 'DetachmentProfile'">
-                    <div class="profile-header">
-                        <h2>{{ profile.name }}</h2>
-                    </div>
-                    <div class="text-left">
-                        <div class="rules-section" ng-if="profile.rules.length">
-                            <h4>Rules</h4>
-                            <ul>
-                                <li ng-repeat="rule in profile.rules">
-                                    <strong>{{ rule.name }}</strong>: <span ng-bind-html="safeHTML(rule.description)"></span>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="enhancements-section">
-                            <h4>Enhancements</h4>
-                            <div class="enhancements-grid" ng-if="profile.enhancements.length">
-                                <div class="enhancement-card" ng-repeat="enhancement in profile.enhancements">
-                                    <div class="enhancement-header">
-                                        <strong>{{ enhancement.name }}</strong>
-                                        <span class="cost-points">{{ enhancement.cost }} ⊗</span>
-                                    </div>
-                                    <span ng-bind-html="safeHTML(enhancement.description)"></span>
-                                </div>
+                        <table class="weapons-table" ng-if="profile.rangedWeapons.length">
+                            <tr>
+                                <th>Ranged Weapons</th>
+                                <th>Rng</th>
+                                <th>A</th>
+                                <th>BS</th>
+                                <th>S</th>
+                                <th>AP</th>
+                                <th>D</th>
+                            </tr>
+                            <tr ng-repeat="weapon in profile.rangedWeapons">
+                                <td>
+                                    <span>{{ weapon.name }}</span>
+                                    <span ng-if="weapon.rules.length">
+                                        <span ng-repeat="rule in weapon.rules" class="weapon-rules">
+                                            [{{ rule }}]
+                                        </span>
+                                    </span>
+                                </td>
+                                <td>{{ weapon.range }}</td>
+                                <td>{{ weapon.A }}</td>
+                                <td>{{ weapon.BS }}</td>
+                                <td>{{ weapon.S }}</td>
+                                <td>{{ weapon.AP }}</td>
+                                <td>{{ weapon.D }}</td>
+                            </tr>
+                        </table>
+                        <table class="weapons-table" ng-if="profile.meleeWeapons.length">
+                            <tr>
+                                <th>Melee Weapons</th>
+                                <th>Rng</th>
+                                <th>A</th>
+                                <th>WS</th>
+                                <th>S</th>
+                                <th>AP</th>
+                                <th>D</th>
+                            </tr>
+                            <tr ng-repeat="weapon in profile.meleeWeapons">
+                                <td>
+                                    {{ weapon.name }}
+                                    <span ng-if="weapon.rules.length">
+                                        <span ng-repeat="rule in weapon.rules" class="weapon-rules">
+                                            [{{ rule }}]
+                                        </span>
+                                    </span>
+                                </td>
+                                <td>{{ weapon.range }}</td>
+                                <td>{{ weapon.A }}</td>
+                                <td>{{ weapon.WS }}</td>
+                                <td>{{ weapon.S }}</td>
+                                <td>{{ weapon.AP }}</td>
+                                <td>{{ weapon.D }}</td>
+                            </tr>
+                        </table>
+                        <div class="text-left">
+                            <div ng-if="profile.abilities.length">
+                                <h4>Abilities</h4>
+                                <ul>
+                                    <li ng-repeat="ability in profile.abilities" ng-bind-html="safeHTML(ability)"></li>
+                                </ul>
                             </div>
-                        </div>
-                        <div class="stratagems-section">
-                            <h4>Stratagems</h4>
-                            <div class="stratagems-grid" ng-if="profile.stratagems.length">
-                                <div class="stratagem-card" ng-repeat="stratagem in profile.stratagems">
-                                    <strong style="border-bottom: 2px solid {{ stratagem.color }}; color: {{ stratagem.color }};">{{ stratagem.name }}</strong>
-                                    <div class="stratagem-detail" ng-if="stratagem.when">
-                                        <em style="color: {{ stratagem.color }};">When:</em> <span>{{ stratagem.when }}</span>
-                                    </div>
-                                    <div class="stratagem-detail" ng-if="stratagem.target">
-                                        <em style="color: {{ stratagem.color }};">Target:</em> <span>{{ stratagem.target }}</span>
-                                    </div>
-                                    <div class="stratagem-detail" ng-if="stratagem.effect">
-                                        <em style="color: {{ stratagem.color }};">Effect:</em> <span ng-bind-html="safeHTML(stratagem.effect)"></span>
-                                    </div>
-                                    <div class="stratagem-detail" ng-if="stratagem.restrictions">
-                                        <em style="color: {{ stratagem.color }};">Restrictions:</em> <span>{{ stratagem.restrictions }}</span>
-                                    </div>
-                                </div>
+                            <div ng-if="profile.damaged">
+                                <p><b>Damaged:</b> <span style="font-weight: normal;">{{ profile.damaged }}</span></p>
                             </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div ng-if="profile.kind === 'ArmyRuleProfile'" class="army-rules-section">
-                    <div class="profile-header">
-                        <h2>{{ profile.name }}</h2>
-                    </div>
-                    <div class="text-left" style="display: flex; align-items: center; justify-content: center;">
-                        <div style="flex: 1;">
-                            <p ng-repeat="desc in profile.description" class="army-rules-description">{{ desc }}</p>
-                        </div>
-                        <div style="flex: 1; display: flex; justify-content: center; align-items: center;">
-                            <table style="margin: 0 10px;">
-                                <thead>
-                                    <tr>
-                                        <th>Battle Size <br />(in points)</th>
-                                        <th>Number of Tokens</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr ng-repeat="token in profile.battleFocusTokens">
-                                        <td>{{ token.size }} ⊗</td>
-                                        <td>{{ token.tokens }}</td>
-                                    </tr>
-                                </tbody>
+                            <div ng-if="profile.wargearAbilities && profile.wargearAbilities.length">
+                                <h4>Wargear Abilities</h4>
+                                <ul>
+                                    <li ng-repeat="wargearAbility in profile.wargearAbilities">{{ wargearAbility }}</li>
+                                </ul>
+                            </div>
+                            <b>Composition:</b>
+                            <table class="invisible-table" style="font-weight: normal;">
+                                <tr ng-repeat="costItem in profile.composition.cost_map | orderBy:'cost'">
+                                    <td style="text-align: right; white-space: nowrap;"><span class="cost-points">{{ costItem.cost }} ⊗</span></td>
+                                    <td ng-if="profile.composition.description.length > 0">{{ formatCompositionDescription(profile.composition.description, costItem.range) }}</td>
+                                </tr>
                             </table>
+                            <div ng-if="profile.options.length">
+                                <h4>Options</h4>
+                                <ul>
+                                    <li ng-repeat="option in profile.options">{{ option }}</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="keywords">
+                            <span ng-repeat="keyword in profile.keywords.sort()">{{ keyword.toUpperCase() }}</span>
+                        </div>
+                        <div class="footnote-section" ng-if="profile.footnotes && profile.footnotes.length">
+                            <hr />
+                            <ul>
+                                <li ng-repeat="footnote in profile.footnotes"><sup>{{ $index + 1 | number:0 }}</sup> {{ footnote }}</li>
+                            </ul>
                         </div>
                     </div>
-                    <div class="agile-maneuvers-section">
-                        <h4>Agile Maneuvers</h4>
-                        <div class="agile-maneuvers-grid">
-                            <div class="maneuver-card" ng-repeat="maneuver in profile.agileManeuvers">
-                                <strong>{{ maneuver.name }}</strong>
-                                <div class="maneuver-detail" ng-if="maneuver.trigger">
-                                    <em>Trigger:</em> <span>{{ maneuver.trigger }}</span>
+
+                    <div ng-if="profile.kind === 'DetachmentProfile'">
+                        <div class="profile-header">
+                            <h2>{{ profile.name }}</h2>
+                            <div>
+                                <button ng-if="isArmyBuilderEnabled" class="filter-button" ng-click="detachment && detachment.name === profile.name ? removeDetachment() : addDetachment(profile)" ng-class="{active: detachment && detachment.name === profile.name}">
+                                    <span ng-if="detachment && detachment.name === profile.name">✔</span>
+                                    <span ng-if="!(detachment && detachment.name === profile.name)">○</span>
+                                    {{ detachment && detachment.name === profile.name ? 'Remove from Army' : 'Add to Army' }}
+                                </button>
+                            </div>
+                        </div>
+                        <div class="text-left">
+                            <div class="rules-section" ng-if="profile.rules.length">
+                                <h4>Rules</h4>
+                                <ul>
+                                    <li ng-repeat="rule in profile.rules">
+                                        <strong>{{ rule.name }}</strong>: <span ng-bind-html="safeHTML(rule.description)"></span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="enhancements-section">
+                                <h4>Enhancements</h4>
+                                <div class="enhancements-grid" ng-if="profile.enhancements.length">
+                                    <div class="enhancement-card" ng-repeat="enhancement in profile.enhancements">
+                                        <div class="enhancement-header">
+                                            <strong>{{ enhancement.name }}</strong>
+                                            <div style="display: flex; align-items: center;">
+                                                <span class="cost-points">{{ enhancement.cost }} ⊗</span>
+                                                <button class="filter-button small-button" ng-click="enhancements[enhancement.name] ? removeEnhancement(enhancement) : addEnhancement(enhancement)" ng-class="{active: enhancements[enhancement.name]}">
+                                                    <span ng-if="enhancements[enhancement.name]">✔</span>
+                                                    <span ng-if="!enhancements[enhancement.name]">○</span>
+                                                    {{ enhancements[enhancement.name] ? 'Remove' : 'Add' }}
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <span ng-bind-html="safeHTML(enhancement.description)"></span>
+                                    </div>
                                 </div>
-                                <div class="maneuver-detail" ng-if="maneuver.effect">
-                                    <em>Effect:</em> <span>{{ maneuver.effect }}</span>
-                                </div>
-                                <div class="maneuver-detail" ng-if="maneuver.restrictions">
-                                    <em>Restrictions:</em> <span>{{ maneuver.restrictions }}</span>
+                            </div>
+                            <div class="stratagems-section">
+                                <h4>Stratagems</h4>
+                                <div class="stratagems-grid" ng-if="profile.stratagems.length">
+                                    <div class="stratagem-card" ng-repeat="stratagem in profile.stratagems">
+                                        <strong style="border-bottom: 2px solid {{ stratagem.color }}; color: {{ stratagem.color }};">{{ stratagem.name }}</strong>
+                                        <div class="stratagem-detail" ng-if="stratagem.when">
+                                            <em style="color: {{ stratagem.color }};">When:</em> <span>{{ stratagem.when }}</span>
+                                        </div>
+                                        <div class="stratagem-detail" ng-if="stratagem.target">
+                                            <em style="color: {{ stratagem.color }};">Target:</em> <span>{{ stratagem.target }}</span>
+                                        </div>
+                                        <div class="stratagem-detail" ng-if="stratagem.effect">
+                                            <em style="color: {{ stratagem.color }};">Effect:</em> <span ng-bind-html="safeHTML(stratagem.effect)"></span>
+                                        </div>
+                                        <div class="stratagem-detail" ng-if="stratagem.restrictions">
+                                            <em style="color: {{ stratagem.color }};">Restrictions:</em> <span>{{ stratagem.restrictions }}</span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                        <div class="footnote-section" ng-if="profile.footnotes && profile.footnotes.length">
+                            <h4>Footnotes</h4>
+                            <ul>
+                                <li ng-repeat="footnote in profile.footnotes">{{ footnote }}</li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="disparate-paths-section">
-                        <h4>Disparate Paths</h4>
-                        <p ng-bind-html="safeHTML(profile.disparatePaths)"></p>
+
+                    <div ng-if="profile.kind === 'ArmyRuleProfile'" class="army-rules-section">
+                        <div class="profile-header">
+                            <h2>{{ profile.name }}</h2>
+                        </div>
+                        <div class="text-left battle-focus-container">
+                            <div class="battle-focus-desctiption-section">
+                                <p class="army-rules-description" ng-bind-html="safeHTML(profile.description)"></p>
+                            </div>
+                            <div class="battle-focus-tokens-section">
+                                <table style="margin: 0 10px;">
+                                    <thead>
+                                        <tr>
+                                            <th>Battle Size <br />(in points)</th>
+                                            <th>Number of Tokens</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="token in profile.battleFocusTokens">
+                                            <td>{{ token.size }} ⊗</td>
+                                            <td>{{ token.tokens }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="agile-maneuvers-section">
+                            <h4>Agile Maneuvers</h4>
+                            <div class="agile-maneuvers-grid">
+                                <div class="maneuver-card" ng-repeat="maneuver in profile.agileManeuvers">
+                                    <strong>{{ maneuver.name }}</strong>
+                                    <div class="maneuver-detail" ng-if="maneuver.trigger">
+                                        <em>Trigger:</em> <span>{{ maneuver.trigger }}</span>
+                                    </div>
+                                    <div class="maneuver-detail" ng-if="maneuver.effect">
+                                        <em>Effect:</em> <span>{{ maneuver.effect }}</span>
+                                    </div>
+                                    <div class="maneuver-detail" ng-if="maneuver.restrictions">
+                                        <em>Restrictions:</em> <span>{{ maneuver.restrictions }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="disparate-paths-section">
+                            <h4>Disparate Paths</h4>
+                            <p ng-bind-html="safeHTML(profile.disparatePaths)"></p>
+                        </div>
+                        <div class="footnote-section" ng-if="profile.footnotes && profile.footnotes.length">
+                            <h4>Footnotes</h4>
+                            <ul>
+                                <li ng-repeat="footnote in profile.footnotes">{{ footnote }}</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -294,6 +439,7 @@
             document.write('<script src="profiles.js?v=' + timestamp + '"><\/script>');
             document.write('<script src="app.js?v=' + timestamp + '"><\/script>');
         </script>
+        <script src="https://unpkg.com/feather-icons"></script>
     </body>
 </html>
 

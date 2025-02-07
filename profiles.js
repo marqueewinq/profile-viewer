@@ -45,10 +45,7 @@ var data = [
                 restrictions: "Once per phase."
             }
         ],
-        description: [
-            "At the start of the battle round, you receive a number of Battle Focus tokens depending on the battle size.",
-            "You can spend Battle Focus tokens to perform an Agile Maneuver. A unit is eligible to perform an Agile Maneuver if it has this ability and hasn't performed an Agile Maneuver this phase. Unless otherwise stated, you can only perform an Agile Maneuver once per phase. At the end of the round, you lose any unused Battle Focus tokens."
-        ],
+        description: "At the start of the battle round, you receive a number of Battle Focus tokens depending on the battle size.<br />You can spend Battle Focus tokens to perform an Agile Maneuver. A unit is eligible to perform an Agile Maneuver if it has this ability and hasn't performed an Agile Maneuver this phase. Unless otherwise stated, you can only perform an Agile Maneuver once per phase. At the end of the round, you lose any unused Battle Focus tokens.",
         disparatePaths: "You can include Harlequin units in your army, even though they do not have the Asuryani keyword. Unless otherwise stated, Unless otherwise stated, you can't select Harlequin or Ynnari as your Army Faction."
     },
     {
@@ -136,6 +133,36 @@ var data = [
                 restrictions: null
             }
         ]
+    },
+    {
+        name: "Windrider Host",
+        kind: "DetachmentProfile",
+        ready: false
+    },
+    {
+        name: "Aspect Host",
+        kind: "DetachmentProfile",
+        ready: false
+    },
+    {
+        name: "Warhost",
+        kind: "DetachmentProfile",
+        ready: false
+    },
+    {
+        name: "Guardian Battlehost",
+        kind: "DetachmentProfile",
+        ready: false
+    },
+    {
+        name: "Seer Council",
+        kind: "DetachmentProfile",
+        ready: false
+    },
+    {
+        name: "Spirit Conclave",
+        kind: "DetachmentProfile",
+        ready: false
     },
     {
         name: "Skyweavers",
@@ -1400,6 +1427,723 @@ var data = [
             "Asurmen"
         ],
         "faction": "Asuryani"
-    }
-
-];
+    },
+    {
+        "name": "Baharroth",
+        "kind": "UnitProfile",
+        "stats": {
+            "M": "14\"",
+            "T": 3,
+            "Sv": "2+/4++",
+            "W": 5,
+            "Ld": "6+",
+            "OC": 1
+        },
+        "rangedWeapons": [
+            {
+                "name": "Fury of the Tempest",
+                "range": "24\"",
+                "A": 4,
+                "BS": "2+",
+                "S": 6,
+                "AP": -1,
+                "D": 2,
+                "rules": ["ASSAULT", "LETHAL HITS"]
+            }
+        ],
+        "meleeWeapons": [
+            {
+                "name": "Shining Blade",
+                "range": "Melee",
+                "A": 6,
+                "WS": "2+",
+                "S": 5,
+                "AP": -2,
+                "D": 2,
+                "rules": ["SUSTAINED HITS 1"]
+            }
+        ],
+        "abilities": [
+            "Leader: Swooping Hawks",
+            "Deep Strike",
+            "Battle Focus",
+            "Cloudstrider: When this model is leading a unit, at the end of your opponent's turn, if this unit is not within Engagement Range with enemy models, you can remove it from the battlefield and place it into Strategic Reserves. In addition, when this unit arrives from Deep Strike, you can place it no closer than 3\" from the enemy; this unit is not eligible to charge in this case.",
+            "Cry of the Wind: Each time this model is set up on the battlefield, until the end of the turn, when this model makes a ranged attack, its successful Hits become Critical Hits."
+        ],
+        "composition": {
+            "description": "Baharroth with Fury of the Tempest and Shining Blade",
+            "cost_map": [
+                { "range": "1", "cost": 115 }
+            ]
+        },
+        "keywords": [
+            "Infantry",
+            "Jump Pack",
+            "Character",
+            "Epic Hero",
+            "Aeldari",
+            "Fly",
+            "Aspect Warrior",
+            "Grenades",
+            "Phoenix Lord"
+        ],
+        "faction": "Asuryani"
+    },
+    {
+        "name": "Fuegan",
+        "kind": "UnitProfile",
+        "stats": {
+            "M": "7\"",
+            "T": 3,
+            "Sv": "2+/4++",
+            "W": 5,
+            "Ld": "6+",
+            "OC": 1
+        },
+        "rangedWeapons": [
+            {
+                "name": "Searsong (beam)",
+                "range": "12\"",
+                "A": 3,
+                "BS": "2+",
+                "S": 8,
+                "AP": -3,
+                "D": 2,
+                "rules": ["ASSAULT", "MELTA 1", "SUSTAINED HITS 2"]
+            },
+            {
+                "name": "Searsong (lance)",
+                "range": "18\"",
+                "A": 1,
+                "BS": "2+",
+                "S": 14,
+                "AP": -4,
+                "D": "D6",
+                "rules": ["ASSAULT", "MELTA 3"]
+            }
+        ],
+        "meleeWeapons": [
+            {
+                "name": "Fire Axe",
+                "range": "Melee",
+                "A": 6,
+                "WS": "2+",
+                "S": 5,
+                "AP": -4,
+                "D": 3,
+                "rules": []
+            }
+        ],
+        "abilities": [
+            "Leader: Fire Dragons",
+            "Battle Focus",
+            "Burning Lance: While this model is leading a unit, add 6\" to the Range characteristic of Melta weapons equipped by the models in that unit.",
+            "Unquenchable Resolve: The first time this model is destroyed, at the end of the phase, roll a D6; on a 2+, set this model back on the battlefield as close as possible to its last position and not within Engagement Range with enemy models, with its full wounds remaining."
+        ],
+        "composition": {
+            "description": "Fuegan with Searsong and Fire Axe",
+            "cost_map": [
+                { "range": "1", "cost": 120 }
+            ]
+        },
+        "keywords": [
+            "Infantry",
+            "Character",
+            "Aeldari",
+            "Epic Hero",
+            "Fuegan",
+            "Phoenix Lord",
+            "Aspect Warrior",
+            "Grenades"
+        ],
+        "faction": "Asuryani"
+    },
+    {
+        "name": "Dark Reapers",
+        "kind": "UnitProfile",
+        "stats": {
+            "M": "6\"",
+            "T": 3,
+            "Sv": "3+ / 5++",
+            "W": "1 (2)¹",
+            "Ld": "6+",
+            "OC": 1
+        },
+        "rangedWeapons": [
+            {
+                "name": "Missile Launcher (starshot)",
+                "range": "48\"",
+                "A": 1,
+                "BS": "2+",
+                "S": 10,
+                "AP": -2,
+                "D": "D6",
+                "rules": ["IGNORES COVER"]
+            },
+            {
+                "name": "Missile Launcher (starswarm)",
+                "range": "48\"",
+                "A": "D6",
+                "BS": "2+",
+                "S": 4,
+                "AP": -1,
+                "D": 1,
+                "rules": ["BLAST", "IGNORES COVER"]
+            },
+            {
+                "name": "Reaper Launcher (starshot)",
+                "range": "48\"",
+                "A": 1,
+                "BS": "3+",
+                "S": 10,
+                "AP": -2,
+                "D": 3,
+                "rules": ["IGNORES COVER"]
+            },
+            {
+                "name": "Reaper Launcher (starswarm)",
+                "range": "48\"",
+                "A": 2,
+                "BS": "3+",
+                "S": 5,
+                "AP": -2,
+                "D": 1,
+                "rules": ["BLAST", "IGNORES COVER"]
+            },
+            {
+                "name": "Shuriken Cannon",
+                "range": "24\"",
+                "A": 3,
+                "BS": "3+",
+                "S": 6,
+                "AP": -1,
+                "D": 2,
+                "rules": ["LETHAL HITS", "IGNORES COVER"]
+            },
+            {
+                "name": "Tempest Launcher",
+                "range": "36\"",
+                "A": "2D6",
+                "BS": "3+",
+                "S": 4,
+                "AP": -1,
+                "D": 1,
+                "rules": ["BLAST", "INDIRECT FIRE"]
+            }
+        ],
+        "meleeWeapons": [
+            {
+                "name": "Close Combat Weapons",
+                "range": "Melee",
+                "A": 2,
+                "WS": "3+",
+                "S": 3,
+                "AP": 0,
+                "D": 1,
+                "rules": []
+            }
+        ],
+        "options": [
+            "Dark Reaper Exarch can replace its Reaper Launcher with a Missile Launcher, Tempest Launcher, or a Shuriken Cannon.",
+            "For every 5 models in this unit, you may have 1 Aspect Shrine Token."
+        ],
+        "abilities": [
+            "Battle Focus",
+            "Aspect Shrine Token",
+            "Inescapable Accuracy: Each time a model in this unit makes a ranged attack, you can ignore all modifiers to its To Hit roll."
+        ],
+        "composition": {
+            "description": "1 Dark Reaper Exarch and [[range]] Dark Reapers",
+            "cost_map": [
+                { "range": "4", "cost": 90 },
+                { "range": "5-9", "cost": 180 }
+            ]
+        },
+        "keywords": [
+            "Infantry",
+            "Aeldari",
+            "Aspect Warriors",
+            "Dark Reapers"
+        ],
+        "faction": "Asuryani",
+        "footnotes": [
+            "Dark Reapers have 1 Wound; Dark Reaper Exarch has 2 Wounds."
+        ]
+    },
+    {
+        "name": "Warp Spiders",
+        "kind": "UnitProfile",
+        "stats": {
+            "M": "12\"",
+            "T": 3,
+            "Sv": "3+/5++",
+            "W": "1 (2)¹",
+            "Ld": "6+",
+            "OC": 1
+        },
+        "rangedWeapons": [
+            {
+                "name": "Death Spinner",
+                "range": "12\"",
+                "A": "D6",
+                "BS": "-",
+                "S": 4,
+                "AP": -1,
+                "D": 1,
+                "rules": ["IGNORES COVER", "TORRENT"]
+            },
+            {
+                "name": "Death Weavers",
+                "range": "6\"",
+                "A": "D6",
+                "BS": "-",
+                "S": 4,
+                "AP": -1,
+                "D": 1,
+                "rules": ["IGNORES COVER", "TORRENT", "TWIN-LINKED"]
+            },
+            {
+                "name": "Exarch's Death Spinner",
+                "range": "12\"",
+                "A": "D6",
+                "BS": "-",
+                "S": 6,
+                "AP": -2,
+                "D": 1,
+                "rules": ["IGNORES COVER", "TORRENT"]
+            },
+            {
+                "name": "Spinneret Rifle",
+                "range": "18\"",
+                "A": "D6",
+                "BS": "-",
+                "S": 5,
+                "AP": -1,
+                "D": 1,
+                "rules": ["IGNORES COVER", "TORRENT"]
+            }
+        ],
+        "meleeWeapons": [
+            {
+                "name": "Close Combat Weapons",
+                "range": "Melee",
+                "A": 2,
+                "WS": "3+",
+                "S": 3,
+                "AP": 0,
+                "D": 1,
+                "rules": []
+            },
+            {
+                "name": "Powerblade Array",
+                "range": "Melee",
+                "A": 10,
+                "WS": "3+",
+                "S": 4,
+                "AP": -2,
+                "D": 1,
+                "rules": ["LETHAL HITS", "TWIN-LINKED"]
+            },
+            {
+                "name": "Powerblades",
+                "range": "Melee",
+                "A": 5,
+                "WS": "3+",
+                "S": 4,
+                "AP": -2,
+                "D": 1,
+                "rules": ["LETHAL HITS", "TWIN-LINKED"]
+            }
+        ],
+        "options": [
+            "Warp Spider Exarch's Death Spinner can be replaced with: 1 Spinneret Rifle and 1 Death Weaver; 1 Powerblade and 1 Death Weaver; 1 Powerblade Array.",
+            "For every 5 models in this unit, add 1 Aspect Shrine Token."
+        ],
+        "abilities": [
+            "Battle Focus",
+            "Aspect Shrine Token",
+            "Flickerjump: In your Movement Phase, each time this model is selected to make a Normal move, it can use this ability. If it does, until the end of turn, this unit is not eligible to declare a charge and the model's Move characteristic becomes 24\". Each time a unit uses this ability, at the end of the phase, roll D6 for each model in this unit; for each 1, this unit suffers 1 mortal wound."
+        ],
+        "composition": {
+            "description": "1 Warp SpiderExarch and [[range]] Warp Spiders",
+            "cost_map": [
+                { "range": "4", "cost": 95 },
+                { "range": "5-9", "cost": 190 }
+            ]
+        },
+        "keywords": [
+            "Infantry",
+            "Aeldari",
+            "Aspect Warriors",
+            "Jump Pack",
+            "Fly",
+            "Warp Spiders"
+        ],
+        "faction": "Asuryani",
+        "footnotes": [
+            "Warp Spiders have 1 Wound; Warp Spider Exarch has 2 Wounds."
+        ]
+    },
+    {
+        "name": "Fire Dragons",
+        "kind": "UnitProfile",
+        "stats": {
+            "M": "7\"",
+            "T": 3,
+            "Sv": "3+/5++",
+            "W": "1 (2)¹",
+            "Ld": "6+",
+            "OC": 1
+        },
+        "rangedWeapons": [
+            {
+                "name": "Dragon Fusion Gun",
+                "range": "12\"",
+                "A": 1,
+                "BS": "3+",
+                "S": 9,
+                "AP": -4,
+                "D": "D6",
+                "rules": ["ASSAULT", "MELTA 3"]
+            },
+            {
+                "name": "Dragon Fusion Pistol",
+                "range": "6\"",
+                "A": 1,
+                "BS": "3+",
+                "S": 9,
+                "AP": -4,
+                "D": "D6",
+                "rules": ["ASSAULT", "MELTA 2"]
+            },
+            {
+                "name": "Dragon Breath Flamer",
+                "range": "12\"",
+                "A": "D6+2",
+                "BS": "-",
+                "S": 6,
+                "AP": -2,
+                "D": 1,
+                "rules": ["ASSAULT", "IGNORES COVER", "TORRENT"]
+            },
+            {
+                "name": "Exarch's Dragon Fusion Gun",
+                "range": "12\"",
+                "A": 1,
+                "BS": "3+",
+                "S": 9,
+                "AP": -4,
+                "D": "D6",
+                "rules": ["ASSAULT", "MELTA 6"]
+            },
+            {
+                "name": "Firepike",
+                "range": "18\"",
+                "A": 1,
+                "BS": "3+",
+                "S": 12,
+                "AP": -4,
+                "D": "D6",
+                "rules": ["ASSAULT", "MELTA 3"]
+            }
+        ],
+        "meleeWeapons": [
+            {
+                "name": "Close Combat Weapons",
+                "range": "Melee",
+                "A": 2,
+                "WS": "3+",
+                "S": 3,
+                "AP": 0,
+                "D": 1,
+                "rules": []
+            },
+            {
+                "name": "Dragon Axe",
+                "range": "Melee",
+                "A": 3,
+                "WS": "3+",
+                "S": 6,
+                "AP": -4,
+                "D": "D6",
+                "rules": []
+            }
+        ],
+        "options": [
+            "Fire Dragon Exarch's Fusion Gun can be replaced with Dragon Breath Flamer; Dragon Fusion Pistol and Dragon Axe; Firepike.",
+            "For each 5 models in this unit, it can have 1 Aspect Shrine Token."
+        ],
+        "abilities": [
+            "Battle Focus",
+            "Aspect Shrine Token",
+            "Assured Destruction: In your Shooting Phase, each time a model in this unit makes a ranged attack targeting a Monster or Vehicle, you can re-roll To Hit, To Wound, and Damage rolls."
+        ],
+        "composition": {
+            "description": "Fire Dragon Exarch and [[range]] Fire Dragons",
+            "cost_map": [
+                { "range": "4", "cost": 100 },
+                { "range": "5-9", "cost": 200 }
+            ]
+        },
+        "keywords": [
+            "Infantry",
+            "Aspect Warriors",
+            "Aeldari",
+            "Fire Dragons",
+            "Grenades"
+        ],
+        "faction": "Asuryani",
+        "footnotes": [
+            "Fire Dragons have 1 Wound; Fire Dragon Exarch has 2 Wounds."
+        ]
+    },
+    {
+        "name": "Dire Avengers",
+        "kind": "UnitProfile",
+        "stats": {
+            "M": "7\"",
+            "T": 3,
+            "Sv": "4+/5++",
+            "W": "1 (2)¹",
+            "Ld": "6+",
+            "OC": 1
+        },
+        "rangedWeapons": [
+            {
+                "name": "Avenger Catapult",
+                "range": "18\"",
+                "A": 4,
+                "BS": "3+",
+                "S": 4,
+                "AP": -1,
+                "D": 1,
+                "rules": ["ASSAULT"]
+            },
+            {
+                "name": "Shuriken Pistol",
+                "range": "12\"",
+                "A": 1,
+                "BS": "3+",
+                "S": 4,
+                "AP": -1,
+                "D": 1,
+                "rules": ["PISTOL", "ASSAULT"]
+            }
+        ],
+        "meleeWeapons": [
+            {
+                "name": "Close Combat Weapon",
+                "range": "Melee",
+                "A": "-",
+                "WS": "3+",
+                "S": 3,
+                "AP": 0,
+                "D": 1,
+                "rules": []
+            },
+            {
+                "name": "Diresword",
+                "range": "Melee",
+                "A": 4,
+                "WS": "3+",
+                "S": 4,
+                "AP": -2,
+                "D": 1,
+                "rules": []
+            },
+            {
+                "name": "Power Glaive",
+                "range": "Melee",
+                "A": 3,
+                "WS": "3+",
+                "S": 5,
+                "AP": -3,
+                "D": 1,
+                "rules": []
+            }
+        ],
+        "options": [
+            "Dire Avenger Exarch's Avenger Catapult can be replaced with: Shuriken Pistol and Diresword or Power Glaive.",
+            "If Dire Avenger Exarch is equipped with Avenger Catapult, it can equip an additional Avenger Catapult.",
+            "Dire Avenger Exarch's Shuriken Pistol can be replaced with Shimmershield.",
+            "For each 5 models in this unit, it can have 1 Aspect Shrine Token."
+        ],
+        "abilities": [
+            "Battle Focus",
+            "Aspect Shrine Token",
+            "Bladestorm: Ranged weapons of this unit have [SUSTAINED HITS 1] while targeting an enemy within half-range."
+        ],
+        "wargearAbilities": [
+            "Shimmershield: 4++ for the bearer."
+        ],
+        "composition": {
+            "description": "1 Dire Avenger Exarch and [[range]] Dire Avengers",
+            "cost_map": [
+                { "range": "4", "cost": 75 },
+                { "range": "5-9", "cost": 150 }
+            ]
+        },
+        "keywords": [
+            "Aeldari",
+            "Infantry",
+            "Grenades",
+            "Aspect Warriors",
+            "Dire Avengers"
+        ],
+        "faction": "Asuryani",
+        "footnotes": [
+            "Dire Avengers have 1 Wound; Dire Avenger Exarch has 2 Wounds."
+        ]
+    },
+    {
+        "name": "Howling Banshees",
+        "kind": "UnitProfile",
+        "stats": {
+            "M": "8\"",
+            "T": 3,
+            "Sv": "4+ / 4++ / 5++ ²",
+            "W": "1 (2)¹",
+            "Ld": "6+",
+            "OC": 1
+        },
+        "rangedWeapons": [
+            {
+                "name": "Shuriken Pistol",
+                "range": "12\"",
+                "A": 1,
+                "BS": "3+",
+                "S": 4,
+                "AP": -1,
+                "D": 1,
+                "rules": ["ASSAULT", "PISTOL"]
+            },
+            {
+                "name": "Triskele",
+                "range": "12\"",
+                "A": 3,
+                "BS": "3+",
+                "S": 3,
+                "AP": -1,
+                "D": 1,
+                "rules": ["ASSAULT", "ANTI-INFANTRY 3+"]
+            }
+        ],
+        "meleeWeapons": [
+            {
+                "name": "Banshee Blade",
+                "range": "Melee",
+                "A": 2,
+                "WS": "3+",
+                "S": 4,
+                "AP": -2,
+                "D": 2,
+                "rules": ["ANTI-INFANTRY 3+"]
+            },
+            {
+                "name": "Executioner",
+                "range": "Melee",
+                "A": 3,
+                "WS": "2+",
+                "S": 6,
+                "AP": -3,
+                "D": 3,
+                "rules": ["ANTI-INFANTRY 2+"]
+            },
+            {
+                "name": "Mirrorswords",
+                "range": "Melee",
+                "A": 4,
+                "WS": "2+",
+                "S": 4,
+                "AP": -2,
+                "D": 2,
+                "rules": ["ANTI-INFANTRY 3+"]
+            },
+            {
+                "name": "Triskele",
+                "range": "Melee",
+                "A": 6,
+                "WS": "2+",
+                "S": 3,
+                "AP": -1,
+                "D": 1,
+                "rules": ["ANTI-INFANTRY 3+"]
+            }
+        ],
+        "options": [
+            "Howling Banshees Exarch can replace their Banshee Blade with Executioner or a Triskele.",
+            "Howling Banshees Exarch can replace their Banshee Blade and Shuriken Pistol with Mirrorswords.",
+            "For each 5 models in this unit, it can have 1 Aspect Shrine Token."
+        ],
+        "abilities": [
+            "Fights First",
+            "Battle Focus",
+            "Aspect Shrine Token",
+            "Acrobatic: This unit is eligible to charge in the turn in which it Advanced."
+        ],
+        "composition": {
+            "description": "1 Howling Banshees Exarch and [[range]] Howling Banshees",
+            "cost_map": [
+                { "range": "4", "cost": 90 },
+                { "range": "5-9", "cost": 180 }
+            ]
+        },
+        "keywords": [
+            "Aeldari",
+            "Infantry",
+            "Aspect Warriors",
+            "Howling Banshees"
+        ],
+        "footnotes": [
+            "Howling Banshees have 1 Wound; Howling Banshees Exarch has 2 Wounds.",
+            "Howling Banshees have 4++ against melee attacks and 5++ against ranged attacks."
+        ],
+        "faction": "Asuryani"
+    },
+    { "name": "Crimson Hunter", "kind": "UnitProfile", "composition": { "cost_map": [{ "range": "-", "cost": 160 }] }, "faction": "Asuryani", ready: false },
+    { "name": "D-Cannon Platform", "kind": "UnitProfile", "composition": { "cost_map": [{ "range": "-", "cost": 125 }] }, "faction": "Asuryani", ready: false },
+    { "name": "Falcon", "kind": "UnitProfile", "composition": { "cost_map": [{ "range": "-", "cost": 130 }] }, "faction": "Asuryani", ready: false },
+    { "name": "Fire Prism", "kind": "UnitProfile", "composition": { "cost_map": [{ "range": "-", "cost": 160 }] }, "faction": "Asuryani", ready: false },
+    { "name": "Guardian Defenders", "kind": "UnitProfile", "composition": { "cost_map": [{ "range": "-", "cost": 100 }] }, "faction": "Asuryani", ready: false },
+    { "name": "Hemlock Wraithfighter", "kind": "UnitProfile", "composition": { "cost_map": [{ "range": "-", "cost": 155 }] }, "faction": "Asuryani", ready: false },
+    { "name": "Jain Zar", "kind": "UnitProfile", "composition": { "cost_map": [{ "range": "-", "cost": 105 }] }, "faction": "Asuryani", ready: false },
+    { "name": "Lhykhis", "kind": "UnitProfile", "composition": { "cost_map": [{ "range": "-", "cost": 120 }] }, "faction": "Asuryani", ready: false },
+    { "name": "Maugan Ra", "kind": "UnitProfile", "composition": { "cost_map": [{ "range": "-", "cost": 100 }] }, "faction": "Asuryani", ready: false },
+    { "name": "Night Spinner", "kind": "UnitProfile", "composition": { "cost_map": [{ "range": "-", "cost": 190 }] }, "faction": "Asuryani", ready: false },
+    { "name": "Rangers", "kind": "UnitProfile", "composition": { "cost_map": [{ "range": "-", "cost": 55 }] }, "faction": "Asuryani", ready: false },
+    { "name": "Shadow Weaver Platform", "kind": "UnitProfile", "composition": { "cost_map": [{ "range": "-", "cost": 75 }] }, "faction": "Asuryani", ready: false },
+    { "name": "Shining Spears", "kind": "UnitProfile", "composition": { "cost_map": [{ "range": "1-2", "cost": 120 }, { "range": "3-4", "cost": 240 }] }, "faction": "Asuryani", ready: false },
+    { "name": "Shroud Runners", "kind": "UnitProfile", "composition": { "cost_map": [{ "range": "1-2", "cost": 80 }, { "range": "3-4", "cost": 160 }] }, "faction": "Asuryani", ready: false },
+    { "name": "Spiritseer", "kind": "UnitProfile", "composition": { "cost_map": [{ "range": "-", "cost": 65 }] }, "faction": "Asuryani", ready: false },
+    { "name": "Storm Guardians", "kind": "UnitProfile", "composition": { "cost_map": [{ "range": "-", "cost": 100 }] }, "faction": "Asuryani", ready: false },
+    { "name": "Striking Scorpions", "kind": "UnitProfile", "composition": { "cost_map": [{ "range": "1-2", "cost": 75 }, { "range": "3-4", "cost": 150 }] }, "faction": "Asuryani", ready: false },
+    { "name": "Swooping Hawks", "kind": "UnitProfile", "composition": { "cost_map": [{ "range": "1-2", "cost": 85 }, { "range": "3-4", "cost": 170 }] }, "faction": "Asuryani", ready: false },
+    { "name": "Vibro Cannon Platform", "kind": "UnitProfile", "composition": { "cost_map": [{ "range": "-", "cost": 60 }] }, "faction": "Asuryani", ready: false },
+    { "name": "Vypers", "kind": "UnitProfile", "composition": { "cost_map": [{ "range": "1-2", "cost": 65 }, { "range": "3-4", "cost": 130 }] }, "faction": "Asuryani", ready: false },
+    { "name": "War Walkers", "kind": "UnitProfile", "composition": { "cost_map": [{ "range": "1-2", "cost": 95 }, { "range": "3-4", "cost": 190 }] }, "faction": "Asuryani", ready: false },
+    { "name": "Warlock", "kind": "UnitProfile", "composition": { "cost_map": [{ "range": "-", "cost": 45 }] }, "faction": "Asuryani", ready: false },
+    { "name": "Warlock Conclave", "kind": "UnitProfile", "composition": { "cost_map": [{ "range": "1-2", "cost": 55 }, { "range": "3-4", "cost": 110 }] }, "faction": "Asuryani", ready: false },
+    { "name": "Warlock Skyrunners", "kind": "UnitProfile", "composition": { "cost_map": [{ "range": "1-2", "cost": 45 }, { "range": "3-4", "cost": 90 }] }, "faction": "Asuryani", ready: false },
+    { "name": "Wave Serpent", "kind": "UnitProfile", "composition": { "cost_map": [{ "range": "-", "cost": 115 }] }, "faction": "Asuryani", ready: false },
+    { "name": "Windriders", "kind": "UnitProfile", "composition": { "cost_map": [{ "range": "1-2", "cost": 80 }, { "range": "3-4", "cost": 160 }] }, "faction": "Asuryani", ready: false },
+    { "name": "Wraithblades", "kind": "UnitProfile", "composition": { "cost_map": [{ "range": "-", "cost": 170 }] }, "faction": "Asuryani", ready: false },
+    { "name": "Wraithguard", "kind": "UnitProfile", "composition": { "cost_map": [{ "range": "-", "cost": 170 }] }, "faction": "Asuryani", ready: false },
+    { "name": "Wraithknight", "kind": "UnitProfile", "composition": { "cost_map": [{ "range": "-", "cost": 435 }] }, "faction": "Asuryani", ready: false },
+    { "name": "Wraithknight with Ghostglaive", "kind": "UnitProfile", "composition": { "cost_map": [{ "range": "-", "cost": 420 }] }, "faction": "Asuryani", ready: false },
+    { "name": "Wraithlord", "kind": "UnitProfile", "composition": { "cost_map": [{ "range": "-", "cost": 140 }] }, "faction": "Asuryani", ready: false },
+    /* Faction: Ynnari */
+    { "name": "The Visarch", "kind": "UnitProfile", "composition": { "cost_map": [{ "range": "-", "cost": 90 }] }, "faction": "Ynnari", ready: false},
+    { "name": "The Yncarne", "kind": "UnitProfile", "composition": { "cost_map": [{ "range": "-", "cost": 250 }] }, "faction": "Ynnari", ready: false},
+    { "name": "Ynnari Archon", "kind": "UnitProfile", "composition": { "cost_map": [{ "range": "-", "cost": 75 }] }, "faction": "Ynnari", ready: false},
+    { "name": "Ynnari Incubi", "kind": "UnitProfile", "composition": { "cost_map": [{ "range": "1-2", "cost": 75 }, { "range": "3-4", "cost": 150 }] }, "faction": "Ynnari", ready: false},
+    { "name": "Ynarri Kabalite Warriors", "kind": "UnitProfile", "composition": { "cost_map": [{ "range": "-", "cost": 110 }] }, "faction": "Ynnari", ready: false},
+    { "name": "Ynnari Raider", "kind": "UnitProfile", "composition": { "cost_map": [{ "range": "-", "cost": 80 }] }, "faction": "Ynnari", ready: false},
+    { "name": "Ynnari Reavers", "kind": "UnitProfile", "composition": { "cost_map": [{ "range": "1-2", "cost": 65 }, { "range": "3-4", "cost": 130 }] }, "faction": "Ynnari", ready: false},
+    { "name": "Ynnari Succubus", "kind": "UnitProfile", "composition": { "cost_map": [{ "range": "-", "cost": 45 }] }, "faction": "Ynnari", ready: false},
+    { "name": "Ynnari Venom", "kind": "UnitProfile", "composition": { "cost_map": [{ "range": "-", "cost": 70 }] }, "faction": "Ynnari", ready: false},
+    { "name": "Ynnari Wyches", "kind": "UnitProfile", "composition": { "cost_map": [{ "range": "-", "cost": 90 }] }, "faction": "Ynnari", ready: false},
+    { "name": "Yvraine", "kind": "UnitProfile", "composition": { "cost_map": [{ "range": "-", "cost": 100 }] , "faction": "Ynnari" , ready: false}},
+    /* Faction: Corsairs */
+    { "name": "Corsair Voidreavers", "kind": "UnitProfile", "composition": { "cost_map": [{ "range": "1-2", "cost": 60 }, { "range": "3-4", "cost": 120 }] }, "faction": "Corsairs", ready: false },
+    { "name": "Corsair Voidscarred", "kind": "UnitProfile", "composition": { "cost_map": [{ "range": "1-2", "cost": 80 }, { "range": "3-4", "cost": 160 }] }, "faction": "Corsairs", ready: false }
+]
