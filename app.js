@@ -8,10 +8,7 @@ app.controller("ProfileController", function ($scope, $sce, $window, $timeout) {
     };
     // Define available factions
     const Factions = {
-        HARLEQUINS: 'Harlequins',
-        ASURYANI: 'Asuryani',
-        CORSAIRS: 'Corsairs',
-        YNNARI: 'Ynnari'
+        HARLEQUINS: 'Harlequins'
     };
 
     $scope.loading = true; // Initialize loading state

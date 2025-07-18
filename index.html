@@ -135,30 +135,7 @@
             </div>
             <div class="container" ng-click="closeMenus()">
                 <div class="header-row">
-                    <h1>Aeldari Datasheets</h1>
-                    <button class="toggle-visibility-button" ng-click="toggleTextVisibility()">
-                        {{ isTextVisible ? 'Hide' : 'Show' }}
-                    </button>
-                </div>
-                <div ng-show="isTextVisible">
-                    <p>
-                        I've implemented this simple profile viewer for the new Aeldari codex as a hobby project.
-                    </p>
-                    <p>
-                        If you want to add a profile, please make a PR to <a class="text" href="https://github.com/marqueewinq/profile-viewer">[the Github repository]</a>.
-                    </p>
-                    <p>
-                        Tech Stack:
-                        <ul>
-                            <li> <a class="text" href="https://github.com/tesseract-ocr/tesseract">[Tesseract OCR]</a> for image to text conversion. </li>
-                            <li> <a class="text" href="https://chatgpt.com">[ChatGPT]</a> for the data entry and cleanup. </li>
-                            <li> <a class="text" href="https://angular.io">[Angular.js]</a> for the frontend. </li>
-                            <li> <a class="text" href="https://feathericons.com">[Feather icons]</a> for the icons. </li>
-                        </ul>
-                    </p>
-                    <p>
-                        With love, <a class="text" href="https://marqueewinq.xyz" target="_blank">[marqueewinq]</a>.
-                    </p>
+                    <h1>Harlequin Datasheets</h1>
                 </div>
                 <div class="search-container">
                     <input
@@ -167,18 +144,6 @@
                         placeholder="Search by name..."
                     />
                     <button class="reset-button" ng-click="resetFilters()">Reset</button>
-                </div>
-                <div class="faction-filter-buttons">
-                    <button class="filter-button" ng-click="filterByFaction(''); searchText=''" ng-class="{active: !selectedFaction}">
-                        <span ng-if="!selectedFaction">✔</span>
-                        <span ng-if="selectedFaction">○</span>
-                        All Factions
-                    </button>
-                    <button class="filter-button" ng-repeat="faction in factions" ng-click="filterByFaction(faction); searchText=''" ng-class="{active: selectedFaction === faction}">
-                        <span ng-if="selectedFaction === faction">✔</span>
-                        <span ng-if="selectedFaction !== faction">○</span>
-                        {{ faction }}
-                    </button>
                 </div>
                 <div class="filter-buttons">
                     <button class="filter-button" ng-click="toggleFilter('UnitProfile'); searchText=''" ng-class="{active: activeFilter === 'UnitProfile'}">
