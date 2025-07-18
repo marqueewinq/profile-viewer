@@ -539,8 +539,8 @@ var data = [
             {
                 name: "Harlequin Special Weapon",
                 range: "Melee",
-                A: 6,
-                WS: "2+",
+                A: 4,
+                WS: "3+",
                 S: 4,
                 AP: -1,
                 D: 1,
