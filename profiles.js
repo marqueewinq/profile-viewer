@@ -121,6 +121,7 @@ var data = [
                 effect:
                     "You can immediately make an additional Luck of the Laughing God roll.",
                 restrictions: null,
+                cost: 1,
             },
             {
                 name: "Mocking Flight",
@@ -131,6 +132,7 @@ var data = [
                 effect:
                     "Until the end of the turn, that unit is eligible to shoot and charge in a turn in which it Fell Back.",
                 restrictions: null,
+                cost: 1,
             },
             {
                 name: "Trickster's Retort",
@@ -141,6 +143,7 @@ var data = [
                     'One Troupe unit from your army that is within 9" from enemy unit.',
                 effect: 'Your unit can make a Normal move of up to 6".',
                 restrictions: null,
+                cost: 1,
             },
             {
                 name: "Bloody Dance*",
@@ -151,6 +154,7 @@ var data = [
                 effect:
                     "Until the end of the phase, this unit scores Critical Wounds on a roll of 5+.",
                 restrictions: null,
+                cost: 1,
             },
             {
                 name: "Exit the Stage",
@@ -161,6 +165,7 @@ var data = [
                 effect:
                     "Remove your unit from the battlefield and place it into Strategic Reserves.",
                 restrictions: null,
+                cost: 1,
             },
         ],
     },
@@ -679,14 +684,14 @@ var data = [
         composition: {
             description:
                 "Shadowseer with Shuriken Pistol, Miststave, and Flip Belt",
-            cost_map: [{ range: "1", cost: 85 }],
+            cost_map: [{ range: "1", cost: 75 }],
         },
         abilities: [
             "Leader: Troupe",
             "Battle Focus",
             "Disparate Paths",
-            'Fog of Dreams (Psychic): When this model is leading the unit, that unit can only be selected as a target of a ranged attack if the attacking model is within 12".',
-            "Treacherous Toxins (Psychic): When this model is leading the Troupe unit, Neuro-distruptor Pistols of that unit have their Damage characteristic increased to D3."
+            'Fog of Dreams (Psychic): When this model is leading the unit, that unit can only be selected as a target of a ranged attack if the attacking model is within 18".',
+            "Treacherous Toxins (Psychic): When this model is leading a unit, Neuro-distruptor weapons of that unit have their Damage characteristic increased to D3."
         ],
         keywords: [
             "Infantry",
