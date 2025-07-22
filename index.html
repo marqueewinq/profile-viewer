@@ -177,9 +177,7 @@
                                 <button ng-click="removeFromArmy(profile)" ng-disabled="!getArmyEntryCountByName(profile.name)">-1</button>
                                 <span>{{ getArmyEntryCountByName(profile.name) }}</span>
                                 <button ng-click="addToArmy(profile)" ng-class="{active: isInArmy(profile)}">
-                                    <span ng-if="isInArmy(profile)">✔</span>
-                                    <span ng-if="!isInArmy(profile)">○</span>
-                                    {{ isInArmy(profile) ? 'Remove from Army' : 'Add to Army' }}
+                                    +1
                                 </button>
                             </div>
                         </div>

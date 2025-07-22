@@ -178,7 +178,7 @@ app.controller("ProfileController", function ($scope, $sce, $window, $timeout) {
         }
     };
 
-    $scope.isArmyBuilderEnabled = false; 
+    $scope.isArmyBuilderEnabled = true; 
     $scope.armyBuilderOpen = false; // Initialize Army Builder menu state
 
     // Function to toggle the Army Builder panel

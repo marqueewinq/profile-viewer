@@ -67,7 +67,7 @@ var data = [
             {
                 name: "Luck of the Laughing God*",
                 description:
-                    "At the start of each battle round, you gain 1 Luck Point for each 1000pts of Harlequin units in your Army.<br />In addition, at the start of the battle round, you can make a Luck of the Laughing God roll to try to increase the number of Luck Points gained. To do so, roll up to six D6. If every result is unique or every result is the same, you gain a number of additional Luck Points equal to the number of D6 rolled.<br />Each Luck Point can be used to change the value of one or more die roll in Advance, Hit, Wound, Damage rolls and/or Saving throws made for a Harlequin unit from your army. Any Luck Points not used by the end of that battle round are lost.",
+                    "At the start of each battle round, you gain 1 Luck Point for each 1000pts of Harlequin units in your Army.<br />In addition, at the start of the battle round, you can make a Luck of the Laughing God roll to try to increase the number of Luck Points gained. To do so, roll up to six D6. If every result is unique or every result is the same, you gain a number of additional Luck Points equal to the number of D6 rolled.<br />Each Luck Point can be used to change the value of one or more die roll in Advance, Hit, Wound, Damage rolls and/or Saving throws made for a Harlequin unit from your army. For each Luck Point spent, you may increase or decrease the result of your roll by 1. You may spend several Luck Points on one roll. If you are using fast dice rolling, this change can be done after rolling multiple rolls or saving throws at once. Treat the changed roll results as if they were unmodified.<br />Any Luck Points not used by the end of that battle round are lost.",
             },
             {
                 name: "Travelling Players",
@@ -679,7 +679,7 @@ var data = [
         composition: {
             description:
                 "Shadowseer with Shuriken Pistol, Miststave, and Flip Belt",
-            cost_map: [{ range: "1", cost: 75 }],
+            cost_map: [{ range: "1", cost: 85 }],
         },
         abilities: [
             "Leader: Troupe",
