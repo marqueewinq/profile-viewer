@@ -64,10 +64,15 @@ var data = [
         name: "Ghosts of the Webway",
         kind: "DetachmentProfile",
         rules: [
-            {
+/*            {
                 name: "Luck of the Laughing God*",
                 description:
                     "At the start of each battle round, you gain 1 Luck Point for each 1000pts of Harlequin units in your Army.<br />In addition, at the start of the battle round, you can make a Luck of the Laughing God roll to try to increase the number of Luck Points gained. To do so, roll up to six D6. If every result is unique or every result is the same, you gain a number of additional Luck Points equal to the number of D6 rolled.<br />Each Luck Point can be used to change the value of one or more die roll in Advance, Hit, Wound, Damage rolls and/or Saving throws made for a Harlequin unit from your army. For each Luck Point spent, you may increase or decrease the result of your roll by 1. You may spend several Luck Points on one roll. If you are using fast dice rolling, this change can be done after rolling multiple rolls or saving throws at once. Treat the changed roll results as if they were unmodified.<br />Any Luck Points not used by the end of that battle round are lost.",
+            },
+*/
+            {
+                name: "Acrobatic Onslaught*",
+                descriptions: "Each time a Harlequins model from your army makes a Charge move, it can move through enemy models. Add 1\" to Advance and Charge moves for a Harlequin models in your army."
             },
             {
                 name: "Travelling Players",
@@ -77,7 +82,7 @@ var data = [
         ],
         enhancements: [
             {
-                name: "Cegorach's Coil",
+                name: "Cegorach's Coil*",
                 cost: 25,
                 description:
                     "Troupe Master model only. Each time the bearer's unit makes a Charge move, select one unit within the Engagement Range of the bearer's unit, then roll one D6 for each model in the bearer's unit that in within the Engagement Range. For each 4+, that enemy unit suffers 1 mortal wound.",
@@ -95,7 +100,7 @@ var data = [
                     "Death Jester model only. Each time the bearer makes a ranged attack, you can change the result of one of the dice to an unmodified 6.",
             },
             {
-                name: "Mistweave",
+                name: "Mistweave*",
                 cost: 15,
                 description:
                     "Shadowseer model only. While the bearer is leading the unit, models in that unit have Stealth and Infiltrators ability.",
@@ -113,15 +118,24 @@ var data = [
                 restrictions:
                     "Each model can only be targeted with this Stratagem once per battle.",
             },
+            // {
+            //     name: "Cegorach Grace*",
+            //     color: "green",
+            //     when: "Any phase, just before you make an Advance, Hit, Wound, Damage roll or a Saving Throw.",
+            //     target: null,
+            //     effect:
+            //         "You can immediately make an additional Luck of the Laughing God roll.",
+            //     restrictions: null,
+            //     cost: 1,
+            // },
             {
-                name: "Cegorach Grace*",
+                name: "Heroes' Fall*",
                 color: "green",
-                when: "Any phase, just before you make an Advance, Hit, Wound, Damage roll or a Saving Throw.",
-                target: null,
+                when: "Fight phase, just after an enemy unit has selected its targets.",
+                target:
+                    "One Harlequins unit from your army that was selected as the target of one or more of the attacking unit’s attacks.",
                 effect:
-                    "You can immediately make an additional Luck of the Laughing God roll.",
-                restrictions: null,
-                cost: 1,
+                    "Until the end of the phase, each time a model in your unit is destroyed, if that model has not fought this phase, roll one D6. On a 3+, do not remove the destroyed model from play; it can fight after the attacking unit has finished making its attacks, and is then removed from play.",
             },
             {
                 name: "Mocking Flight",
